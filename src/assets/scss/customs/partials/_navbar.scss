@@ -1,0 +1,53 @@
+/* navbar-light classes */
+
+.navbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  height: 50px;
+  box-sizing: border-box;
+  max-width: 960px;
+
+  .navbar-brand {
+    font-family: "courgette", cursive;
+    font-weight: 700;
+    font-size: 16px;
+    user-select: none;
+    color: var(--bs-primary);
+    text-transform: uppercase;
+  }
+
+  .navbar-nav {
+    .nav-item .nav-link span {
+      font-family: "courgette", cursive;
+      font-weight: 400;
+      font-size: 0.97rem;
+      text-transform: capitalize;
+    }
+
+    .dropdown-menu {
+      left: -160px;
+    }
+
+    .user-widget .login {
+      width: 200px;
+      margin-left: 10px;
+      margin-right: 10px;
+      .dropdoown-item {
+        width: 95%;
+      }
+
+      .nav-link:hover,
+      &.nav-link:active {
+        color: var(--bs-primary) !important;
+      }
+    } /*close user widget  */
+  } /*close navbar-nav  */
+} /*close navbar  */
+
+.navbar-transparent {
+  box-shadow: none !important;
+  .nav-link {
+    color: var(--bs-light);
+  }
+}

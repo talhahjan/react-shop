@@ -1,0 +1,70 @@
+@mixin input-box-shadow() {
+  box-shadow: 0 0 8px 0 var(--bs-primary);
+}
+
+@mixin centralize {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin responsive-img($max-width) {
+  width: 100%;
+  max-width: $max-width;
+  min-width: 120px;
+  height: auto;
+}
+
+//social btn variants
+@mixin social-btn-variant($bg, $name) {
+  $color: #fff;
+  $color-hover: $color;
+  $red: red($bg);
+  $green: green($bg);
+  $blue: blue($bg);
+  color: $color;
+  @if $name==instagram {
+    background: linear-gradient(45deg, #405de6, #c13584, #e1306c, #fd1d1d);
+  } @else {
+    background: $bg;
+  }
+  &:hover,
+  &:focus {
+    color: $color;
+    box-shadow: 0px 4px 30px rgba($red, $green, $blue, 0.5);
+  }
+}
+
+// social btn outline variants
+@mixin social-btn-outline-variant($bg, $name) {
+  $bgDarker: darken($bg, 20%);
+  $bgLighter: lighten($bg, 20%);
+  $color: $bg;
+  $color-hover: #fff;
+  $red: red($bg);
+  $green: green($bg);
+  $blue: blue($bg);
+  background-color: transparent;
+  border: 1px solid $bg;
+  color: $bg;
+
+  &:hover,
+  &:focus {
+    color: $color-hover;
+    @if $name==instagram {
+      background: linear-gradient(
+        45deg,
+        #405de6,
+        #5851db,
+        #833ab4,
+        #c13584,
+        #e1306c,
+        #fd1d1d
+      );
+    } @else {
+      background: $bg;
+    }
+
+    box-shadow: 0px 4px 30px rgba($red, $green, $blue, 0.5);
+  }
+}

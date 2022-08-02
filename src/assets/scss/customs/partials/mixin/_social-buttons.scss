@@ -1,0 +1,36 @@
+@mixin social-btn-variat($bg, $border, $color){
+  $bgDarker:darken($bg, 20%);
+  $bgLighter:lighten($bg, 20%);
+  $HEX2RGB: red($bg),green($bg),blue($bg);
+  
+{
+color: $color
+ background-color: linear-gradient(45deg, $bg, $bgLighter);
+ box-shadow: 0px 4px 30px rgba($HEX2RGB, 0.5);
+
+&:hover,&:focus{
+    outline: 0;
+
+color: $color;
+}
+
+}
+
+
+@mixin social-btn-outline-variat($bg, $border, $color){
+  $bgDarker:darken($bg, 20%);
+  $bgLighter:lighten($bg, 20%);
+  $HEX2RGB: red($bg),green($bg),blue($bg);
+  
+{
+color: $color
+ background-color: linear-gradient(45deg, $bg, $bgLighter);
+ box-shadow: 0px 4px 30px rgba($HEX2RGB, 0.5);
+
+&:hover,&:focus{
+    outline: 0;
+color: $color;
+}
+
+}
+

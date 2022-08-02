@@ -1,0 +1,10 @@
+@mixin card-header-variant($bg){
+    @include gradient-bg($bg);
+   
+   }
+
+
+   @mixin card-header-google-variant($bg){
+    @include gradient-bg($bg);
+   
+   }

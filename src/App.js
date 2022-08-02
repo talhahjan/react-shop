@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/layout";
+import Home from "./pages/home";
+import Section from "./pages/collection/section";
+import Category from "./pages/collection/category";
+import Product from "./pages/collection/product";
+import Login from "./pages/auth/login";
+import Logout from "./pages/auth/logout";
+import Register from "./pages/auth/register";
+import Profile from "./pages/user/profile";
+import Error from "./pages/error";
+import NotFound from "./pages/error/404";
+import  ProtectedRoutes  from "./components/protectedRoutes";
+import AuthRoutes from "./components/AuthRoutes";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <Routes>
+    <Route path="/" element={<AuthRoutes />}>
+      <Route path='/login' element={<Login />} />
+      <Route path='/register' element={<Register />} />
+      </Route>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/collection/:section" element={<Section />} />
+        <Route path="/collection/:section/:category" element={<Category />} />
+        <Route
+          path="/collection/:section/:category/:product"
+          element={<Product />}
+        />
+        {/* user profile  cart etc paes */}
+        <Route path="/" element={<ProtectedRoutes />}>
+        <Route path="/user/profile" element={<Profile />} />
+        <Route path="/logout" element={<Logout />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+        <Route path="/error/:code" element={<Error />} />
+        
+      </Route>
+    </Routes>
+  </BrowserRouter>
   );
 }
 

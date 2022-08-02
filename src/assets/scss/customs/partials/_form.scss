@@ -1,0 +1,96 @@
+::placeholder {
+  font-family: "Roboto slab", sans-serif;
+  font-size: 0.8em;
+  font-weight: 300;
+  color: gray;
+}
+
+.form-control {
+  display: block;
+  font-family: "Roboto slab", sans-serif;
+  font-size: 0.9em;
+  font-weight: 400;
+  color: gray;
+  width: 100%;
+  border: 1px solid var(--bs-primary);
+  border-radius: 4px;
+  line-height: 1.5;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  background-clip: padding-box;
+  appearance: none; // Fix appearance for date inputs in Safari
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--bs-primary);
+  @include input-box-shadow;
+}
+
+.inputWithIcon .form-control:focus,
+.inputWithAction .form-control:focus {
+  z-index: 0;
+}
+.inputWithIcon .form-control {
+  padding-left: 45px;
+}
+
+.inputWithAction .form-control {
+  padding-right: 30px;
+}
+
+.inputWithIcon,
+.inputWithAction {
+  position: relative;
+}
+
+.inputWithIcon svg:not(.action) {
+  position: absolute;
+  left: 5px;
+  top: 0;
+  height: 100%;
+  width: 30px;
+  color: var(--bs-primary);
+  transition: 0.3s;
+  @include centralize;
+}
+
+.inputWithIcon .form-control:focus + svg {
+  color: var(--bs-primary);
+}
+
+.inputWithIcon.inputIconBg svg:not(.action) {
+  background-color: #aaa;
+  color: #fff;
+  border-radius: 6px 0 0 6px;
+}
+
+.inputWithIcon.inputIconBg .form-control:focus + svg:not(.action) {
+  color: #fff;
+  background-color: var(--bs-primary);
+}
+
+.inputWithAction svg.action {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  margin: auto;
+  transition: 0.3s;
+  transition: transform 2s; /* Animation */
+  cursor: pointer;
+  @include centralize;
+}
+
+.inputWithIcon .form-control:focus + i:not(.action) {
+  color: var(--bs-primary);
+}
+
+.inputWithIcon.inputIconBg svg:not(.action) {
+  background-color: var(--bs-primary);
+  color: #fff;
+  border-radius: 4px 0 0 4px;
+}

@@ -1,0 +1,111 @@
+.offcanvas.categories {
+  .accordion-header {
+    button {
+      height: 80px;
+      line-height: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      &.women {
+        background-color: #be4d25;
+        color: var(--bs-light);
+      }
+      &.men {
+        background-color: rgb(212, 172, 13);
+        color: var(--bs-light);
+      }
+      &.kid {
+        background-color: rgb(245, 183, 177);
+        color: var(--bs-light);
+      }
+    }
+  }
+}
+.filter {
+  overflow-y: auto;
+  .card {
+    box-shadow: none;
+    margin: 4px 0 4px 0; /* top right bottom left  */
+    .filter-content {
+      width: 100%;
+      .list-group {
+        border: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+
+      .list-group-item {
+        font-weight: 500;
+        font-size: 14px;
+        border: none;
+      }
+
+      &.sizes {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        .size {
+          border: 1px solid #333;
+          padding: 4px 8px;
+          margin: 4px 4px;
+          border-radius: 2px;
+          text-align: center;
+          cursor: pointer;
+          &.active {
+            background-color: var(--bs-primary);
+            color: #fff;
+            border: none;
+            &:hover {
+              color: invert($color: #000000);
+            }
+          }
+          &:hover {
+            color: var(--bs-primary);
+            border: 1px solid var(--bs-primary);
+          }
+        }
+      }
+
+      & .colors {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+
+        .color {
+          border: 1px solid;
+          padding: 4px 8px;
+          margin: 4px 4px;
+          border-radius: 5px;
+          height: 25px;
+          text-align: center;
+          cursor: pointer;
+
+          &.selected:before {
+            content: "\2713";
+          }
+        }
+      }
+    }
+    .card-header {
+      margin: 4px;
+      padding: 4px;
+      box-shadow: none;
+      background-color: #fff;
+      border: none;
+      user-select: none;
+      i {
+        color: #000;
+      }
+      .title {
+        color: var(--bs-primary);
+      }
+      i {
+        cursor: pointer;
+      }
+    }
+
+    ul {
+      list-style: none;
+      /*  li{
+                margin: 4px 0; 
+            }*/
+    }
+  }
+}
