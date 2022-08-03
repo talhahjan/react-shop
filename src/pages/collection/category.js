@@ -4,7 +4,8 @@ import Filter from "../../components/filter";
 import { MdTune } from "react-icons/md";
 import CardProduct from "../../components/productcard";
 import { useCategory } from "../../hooks/fetchData";
-// import Skeleton from "react-loading-skeleton";
+import spinner from '../../assets/images/spinner.gif'
+import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 const Category = () => {
   let { section, category } = useParams();
@@ -56,6 +57,9 @@ const Category = () => {
       <Filter />
       <main className="product-listing">
         <div className="container-fluid">
+
+
+
           {/* <!-- breadcrup start  --> */}
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb justify-content-start">
@@ -161,9 +165,24 @@ const Category = () => {
               </div>
             </div>
           </div>
-          <div className="products my-2">
-            {isLoading && !isError && <>Loading data Please wait ...</>}
 
+          {isLoading && !isError &&    (
+            <>
+            <div>  
+              <Skeleton baseColor="#fafafa" highlightColor="#eaeaea"
+                className="m-1"
+                height={200}
+                    width={180}
+                    count={10}
+                   inline={true}
+                  />
+                </div>
+                  </>
+                  )}
+
+          <div className="products my-2">
+
+         
             {!isLoading &&
               !isError &&
               data?.pages.map((groups, i) => {
@@ -179,20 +198,25 @@ const Category = () => {
                   </Fragment>
                 );
               })}
-          </div>
+         </div>
+
+        
+
+
           {!isLoading && (
             <>
               <button
                 disabled={!hasNextPage}
-                className="btn btn-outline-primary btn-sm"
+                className="btn btn-outline-primary d-block mx-auto"
                 onClick={fetchNextPage}
               >
-                Load more ...
+                Load more
               </button>
+
               <div className="p-2">
-                {isFetching && isFetchingNextPage ? "Fetching .." : null}
+                {isFetching && isFetchingNextPage ?  <img src={spinner}  className="mx-auto d-block"  alt="" /> : null}
                 {!hasNextPage && (
-                  <div className="alert alert-dark  mb-1" role="alert">
+                  <div className="alert alert-dark mb-1" role="alert">
                     You have seen all results want to see more consider remove
                     filter options
                   </div>
@@ -200,7 +224,8 @@ const Category = () => {
               </div>
             </>
           )}
-        </div>
+      
+           </div>
       </main>
     </>
   );

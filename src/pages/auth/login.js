@@ -258,7 +258,7 @@ const LoginForm = () => {
                 >
                   Log In
                   <span className="d-none ml-2" id="dots">
-                    ... <img src="/spinner.gif" width="25" height="25" alt="" />
+                    ... <img src="/assets/images/spinner.gif" width="30" height="30" alt="" />
                   </span>
                 </button>
               </div>

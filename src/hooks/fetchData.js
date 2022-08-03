@@ -163,3 +163,18 @@ export const useUpdateProfile = () => {
   });
 };
 // export const useUpdateProfile=useMutation()
+
+
+export const useFilter = () => {
+  return useQuery(
+    "filter",
+    () => axios.get(`api/filter`).catch((error) => {throw new Error(error);}).then((response)=>{
+      return response.data;
+    }),
+    {
+      cacheTime: 50000,
+      // enabled: false,
+      // redirect user to 520 error page if any error occured
+    }
+  );
+};

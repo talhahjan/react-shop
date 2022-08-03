@@ -1,9 +1,11 @@
 import { useEffect, Fragment } from "react";
 import { Link, useParams } from "react-router-dom";
 import Filter from "../../components/filter";
-import { useSection } from "../../hooks/fetchData";
+import { useSection,useFilter } from "../../hooks/fetchData";
 import { MdTune } from "react-icons/md";
 import CardProduct from "../../components/productcard";
+import Skeleton from "react-loading-skeleton";
+import spinner from '../../assets/images/spinner.gif'
 import "react-loading-skeleton/dist/skeleton.css";
 
 const Section = () => {
@@ -17,6 +19,7 @@ const Section = () => {
     isFetching,
     isFetchingNextPage,
   } = useSection(section);
+
 
   useEffect(() => {
     let searchForm = document.querySelector(".search-bar");
@@ -53,6 +56,8 @@ const Section = () => {
   return (
     <>
       {/* <SideBar /> */}
+
+
       <Filter />
       <main className="product-listing">
         <div className="container-fluid">
@@ -158,9 +163,22 @@ const Section = () => {
               </div>
             </div>
           </div>
-          <div className="products my-2">
-            {isLoading && !isError && <>Loading data Please wait ...</>}
+          {isLoading && !isError &&    (
+            <>
+            <div>  
+              <Skeleton baseColor="#fafafa" highlightColor="#eaeaea"
+                className="m-1"
+                height={200}
+                    width={180}
+                    count={10}
+                   inline={true}
+                  />
+                </div>
+                  </>
+                  )}
 
+          <div className="products my-2">
+           
             {!isLoading &&
               !isError &&
               data?.pages.map((groups, i) => {
@@ -177,15 +195,16 @@ const Section = () => {
             <>
               <button
                 disabled={!hasNextPage}
-                className="btn btn-outline-primary btn-sm"
+                className="btn btn-outline-primary d-block mx-auto"
                 onClick={fetchNextPage}
               >
-                Load more ...
+                Load more
               </button>
+
               <div className="p-2">
-                {isFetching && isFetchingNextPage ? "Fetching .." : null}
+                {isFetching && isFetchingNextPage ?  <img src={spinner}  className="mx-auto d-block"  alt="" /> : null}
                 {!hasNextPage && (
-                  <div className="alert alert-dark  mb-1" role="alert">
+                  <div className="alert alert-dark mb-1" role="alert">
                     You have seen all results want to see more consider remove
                     filter options
                   </div>
@@ -193,7 +212,8 @@ const Section = () => {
               </div>
             </>
           )}
-        </div>
+           
+           </div>
       </main>
     </>
   );

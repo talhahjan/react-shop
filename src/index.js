@@ -4,7 +4,7 @@ import "./assets/css/style.css";
 import React,{createContext} from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
-// import { ReactQueryDevtools } from "react-query/devtools";
+import { ReactQueryDevtools } from "react-query/devtools";
 import axios from "axios";
 import App from "./App";
 
@@ -33,7 +33,7 @@ root.render(
       <App />
       </userContext.Provider>
     </React.StrictMode>
-    {/* <ReactQueryDevtools initialIsOpen={false} position="bottom-right" /> */}
+    <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
   </QueryClientProvider>
 
 );
