@@ -22,12 +22,6 @@ export const SocialLogin = () => {
     cssClass="my-facebook-button-class"
     icon="fa-facebook"
   />
-  <InstagramLogin
-  clientId="396795559223412"
-  buttonText="Instagram Login"
-  onSuccess={response}
-  onFailure={response}
-/>
 
 
 
@@ -36,12 +30,13 @@ export const SocialLogin = () => {
   buttonText="Instagram Login"
     onSuccess={response}
     onFailure={response}
+    scope='user_profile'
   />
 
 
 <GoogleLogin
 clientId="924551858846-j9h4o2dv11p6bbt9chrm99rg0uhjhcnn.apps.googleusercontent.com"
-    buttonText="Login"
+    buttonText="Login Google"
     onSuccess={response}
     onFailure={response}
     cookiePolicy={'single_host_origin'}
