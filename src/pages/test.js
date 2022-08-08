@@ -5,7 +5,7 @@ import InstagramLogin from 'react-instagram-login';
 
 
 
-const responseInstagram = (response) => {
+const response= (response) => {
   console.log(response);
 }
 
@@ -13,11 +13,14 @@ const responseInstagram = (response) => {
 export const SocialLogin = () => {
   return (
   <>
-    <FacebookLogin
-    clientId="377398063014920"
-    buttonText="Facebook Login"
-    onSuccess={responseInstagram}
-    onFailure={responseInstagram}
+
+<FacebookLogin
+    appId="377398063014920"
+    autoLoad={true}
+    fields="name,email,picture"
+    callback={response}
+    cssClass="my-facebook-button-class"
+    icon="fa-facebook"
   />
   <InstagramLogin
   clientId="396795559223412"
@@ -25,12 +28,26 @@ export const SocialLogin = () => {
   onSuccess={responseInstagram}
   onFailure={responseInstagram}
 />
-    <GoogleLogin
-    clientId="924551858846-j9h4o2dv11p6bbt9chrm99rg0uhjhcnn.apps.googleusercontent.com"
-    buttonText="Google Login"
-    onSuccess={responseInstagram}
-    onFailure={responseInstagram}
+
+
+
+<InstagramLogin
+  clientId="396795559223412"
+  buttonText="Instagram Login"
+    onSuccess={response}
+    onFailure={response}
   />
+
+
+<GoogleLogin
+clientId="924551858846-j9h4o2dv11p6bbt9chrm99rg0uhjhcnn.apps.googleusercontent.com"
+    buttonText="Login"
+    onSuccess={response}
+    onFailure={response}
+    cookiePolicy={'single_host_origin'}
+  />
+
+
   </>
   )
 }
