@@ -7,11 +7,10 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import axios from "axios";
 import App from "./App";
-
-import jwt_decode from "jwt-decode";
-
+import useAuth from '../src/utili/useAuth';
 const queryClient = new QueryClient();
 const token =localStorage.getItem('token');
+
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common["Conent-Type"] = "application/json";
@@ -20,7 +19,7 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const user =token ? jwt_decode(token): null;
+const auth=useAuth(token);
 const userContext=createContext();
 
 
@@ -29,7 +28,7 @@ const userContext=createContext();
 root.render(
   <QueryClientProvider client={queryClient}>
     <React.StrictMode>
-      <userContext.Provider value={user}>
+      <userContext.Provider value={auth}>
       <App />
       </userContext.Provider>
     </React.StrictMode>

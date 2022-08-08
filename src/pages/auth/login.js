@@ -11,6 +11,7 @@ import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import spinner from '../../assets/images/spinner.gif'
 export default function Register() {
   useEffect(() => {
     document.querySelector("body").classList.remove("wrapper");
@@ -258,9 +259,10 @@ const LoginForm = () => {
                 >
                   Log In
                   <span className="d-none ml-2" id="dots">
-                    ... <img src="/assets/images/spinner.gif" width="30" height="30" alt="" />
+                    ... <img src={spinner} width="35" height="35" alt="" />
                   </span>
                 </button>
+                
               </div>
             </Form>
           );
