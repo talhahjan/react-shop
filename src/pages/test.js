@@ -25,8 +25,8 @@ export const SocialLogin = () => {
   <InstagramLogin
   clientId="396795559223412"
   buttonText="Instagram Login"
-  onSuccess={responseInstagram}
-  onFailure={responseInstagram}
+  onSuccess={response}
+  onFailure={response}
 />
 
 
