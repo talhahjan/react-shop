@@ -30,7 +30,7 @@ export const SocialLogin = () => {
   buttonText="Instagram Login"
     onSuccess={response}
     onFailure={response}
-    scope='instagram_graph_user_profile'
+    scope='user_profile,user_media'
   />
 
 
