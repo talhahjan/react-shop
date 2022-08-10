@@ -10,12 +10,12 @@ const response= (response) => {
 }
 
 
-export const SocialLogin = () => {
+const SocialLogin = () => {
   return (
   <>
 
 <FacebookLogin
-    appId="377398063014920"
+    appId={process.env.REACT_APP_FACEBOOK_APP_ID}
     autoLoad={true}
     fields="name,email,picture"
     callback={response}
@@ -26,16 +26,17 @@ export const SocialLogin = () => {
 
 
 <InstagramLogin
-  clientId="396795559223412"
+  clientId={process.env.REACT_APP_INSTAGRAM_APP_ID}
   buttonText="Instagram Login"
     onSuccess={response}
     onFailure={response}
     scope='user_profile,user_media'
+    scopes='user_profile,user_media'
   />
 
 
 <GoogleLogin
-clientId="924551858846-j9h4o2dv11p6bbt9chrm99rg0uhjhcnn.apps.googleusercontent.com"
+clientId={process.env.REACT_APP_GOOGLE_APP_ID}
     buttonText="Login Google"
     onSuccess={response}
     onFailure={response}
@@ -46,3 +47,6 @@ clientId="924551858846-j9h4o2dv11p6bbt9chrm99rg0uhjhcnn.apps.googleusercontent.c
   </>
   )
 }
+
+
+export default SocialLogin

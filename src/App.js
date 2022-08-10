@@ -12,7 +12,7 @@ import Error from "./pages/error";
 import NotFound from "./pages/error/404";
 import  ProtectedRoutes  from "./components/protectedRoutes";
 import AuthRoutes from "./components/AuthRoutes";
-import { SocialLogin } from "./pages/test";
+import SocialLogin from "./pages/test";
 function App() {
   return (
     <BrowserRouter>

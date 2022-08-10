@@ -20,7 +20,7 @@ return null;
 const user=jwt_decode(token);
 
 // if age of token is more than one day refresh it
-if(user.iat * 1000 < lastDate){
+if(user.nbf * 1000 < lastDate){
     console.log(`jwt need to be refreshed`)
 refreshJwt();
 }
