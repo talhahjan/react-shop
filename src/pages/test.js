@@ -1,52 +1,39 @@
-import React from 'react';
-import FacebookLogin from 'react-facebook-login';
-import GoogleLogin from 'react-google-login';
-import InstagramLogin from 'react-instagram-login';
+import React, { useCallback, useRef, useState } from 'react'
+import {
+  LoginSocialGoogle,
+  LoginSocialFacebook,
+  LoginSocialInstagram,
+  IResolveParams,
+} from 'reactjs-social-login'
 
 
 
-const response= (response) => {
-  console.log(response);
-}
-
+// REDIRECT URL must be same with URL where the (reactjs-social-login) components is locate
+// MAKE SURE the (reactjs-social-login) components aren't unmounted or destroyed before the ask permission dialog closes
+const REDIRECT_URI = window.location.href;
 
 const SocialLogin = () => {
+
+
+  const onLogoutSuccess = useCallback(() => {
+    alert('logout success')
+  }, [])
+
   return (
-  <>
-
-<FacebookLogin
-    appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-    autoLoad={true}
-    fields="name,email,picture"
-    callback={response}
-    cssClass="my-facebook-button-class"
-    icon="fa-facebook"
-  />
-
-
-
-<InstagramLogin
-  clientId={process.env.REACT_APP_INSTAGRAM_APP_ID}
-  buttonText="Instagram Login"
-    onSuccess={response}
-    onFailure={response}
-    scope='user_profile,user_media'
-    scopes='user_profile,user_media'
-  />
-
-
-<GoogleLogin
-clientId={process.env.REACT_APP_GOOGLE_APP_ID}
-    buttonText="Login Google"
-    onSuccess={response}
-    onFailure={response}
-    cookiePolicy={'single_host_origin'}
-  />
-
-
-  </>
+          <LoginSocialGoogle
+          client_id={process.env.REACT_APP_GOOGLE_APP_ID}
+            onResolve={(IResolveParams) => {
+              let {provider, date}=IResolveParams;
+             console.log(provider)
+            }}
+            onReject={(err) => {
+              console.log("rejected")
+            }}
+          >
+            {console.log(process.env.REACT_APP_GOOGLE_APP_ID)}
+            <button className='btn btn-primary'>Login</button>
+          </LoginSocialGoogle>
   )
 }
 
-
-export default SocialLogin
+export default SocialLogin;
