@@ -1,4 +1,4 @@
-export const Socialite=async (provider,data)=>{
+const Socialite=async (provider,data)=>{
 return await axios.post(`api/login/${provider}`).catch((error)=>{
     throw Error(error);
 }).then((res)=>{
@@ -9,4 +9,4 @@ console.log(res);
 
 
 
-
+export default Socialite;
