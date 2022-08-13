@@ -1,6 +1,7 @@
-const Socialite=async (provider,data)=>{
-return await axios.post(`api/login/${provider}`).catch((error)=>{
-    throw Error(error);
+import axios from 'axios';
+const Socialite=async (userData)=>{
+return await axios.post(`api/login/${userData.provider}`, userData).catch((error)=>{
+  throw Error(error);
 }).then((res)=>{
 console.log(res);
 });

@@ -242,6 +242,7 @@ const Header = () => {
                                     <img
                                       src={user.picture}
                                       width="60"
+                                     referrerPolicy={user.provider=="google" ? "no-referrer": null}
                                       height="60"
                                       className="img-thumbnail rounded-circle shadow"
                                       alt=""
