@@ -9,7 +9,7 @@ const refreshJwt=async()=>{
     .catch(error=> console.log(`error refreshing jwt token`, error))
 }
 
-
+let nothing =null;
 const useAuth=(token)=>{
 const lastDate = Date.now() - (1 * 24 * 60 * 60 * 1000);  
 
@@ -35,7 +35,5 @@ if(user.exp * 1000 < Date.now())
 return user;
 
 }
-
-
 
 export default useAuth;
