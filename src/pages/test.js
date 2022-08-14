@@ -102,6 +102,7 @@ export const SocialInstagramLogin=()=>{
     cssClass="btn-social btn-outline-instagram btn-social-circle waves-effect waves-light m-1"
     onSuccess={responseFacebook}
     onFailure={responseFacebook}
+    scope='user_profile,user_media'
     buttonText={<FaInstagram />}
     />
  )
