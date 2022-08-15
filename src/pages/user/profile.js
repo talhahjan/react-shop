@@ -52,7 +52,12 @@ export default function Profile() {
         <div className="profile-image">
           <img
             className="shadow"
-            src={process.env.REACT_APP_API_BASE_URL + "/" + user.profile.avatar}
+            referrerPolicy={
+              user.profile.avatar.includes("googleusercontent.com")
+                ? "no-referrer"
+                : null
+            }
+            src={user.profile.avatar}
             alt=""
           />
         </div>

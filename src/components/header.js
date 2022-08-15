@@ -1,10 +1,10 @@
-import { useContext } from "react";
 import {
-  FaBars,
-  FaFacebookF,
-  FaGooglePlusG,
-  FaInstagram,
-} from "react-icons/fa";
+  SocialInstagramLogin,
+  SocialFacebookLogin,
+  SocialGoogleLogin,
+} from "../components/sociallogin";
+import { useContext } from "react";
+import { FaBars } from "react-icons/fa";
 import {
   MdSearch,
   MdLocalMall,
@@ -181,24 +181,9 @@ const Header = () => {
                               </p>
                             </div>
                             <div className="social-line text-center">
-                              <a
-                                href="!#"
-                                className="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1"
-                              >
-                                <FaFacebookF />
-                              </a>
-                              <a
-                                href="!#"
-                                className="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"
-                              >
-                                <FaGooglePlusG />
-                              </a>
-                              <a
-                                href="login/instagram"
-                                className="btn-social btn-outline-instagram waves-effect btn-social-circle waves-light m-1"
-                              >
-                                <FaInstagram />
-                              </a>
+                              <SocialInstagramLogin />
+                              <SocialGoogleLogin />
+                              <SocialFacebookLogin />
                             </div>
                             <br />
                             <p className="text-muted mb-2 text-left">
@@ -242,7 +227,11 @@ const Header = () => {
                                     <img
                                       src={user.picture}
                                       width="60"
-                                     referrerPolicy={user.provider=="google" ? "no-referrer": null}
+                                      referrerPolicy={
+                                        user.provider == "google"
+                                          ? "no-referrer"
+                                          : null
+                                      }
                                       height="60"
                                       className="img-thumbnail rounded-circle shadow"
                                       alt=""

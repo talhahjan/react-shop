@@ -1,10 +1,9 @@
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 import {
-  FaFacebookF,
-  FaGooglePlusG,
-  FaInstagram,
-  FaEyeSlash,
-  FaEye,
-} from "react-icons/fa";
+  SocialInstagramLogin,
+  SocialFacebookLogin,
+  SocialGoogleLogin,
+} from "../../components/sociallogin";
 import { ToastContainer, toast } from "react-toastify";
 import { MdFingerprint, MdEmail, MdPersonAdd, MdFace } from "react-icons/md";
 import { useState, useEffect } from "react";
@@ -89,24 +88,9 @@ export default function Login() {
           </div>
           <div className="card-body">
             <div className="social-line text-center">
-              <a
-                href="login/facebook"
-                className="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1"
-              >
-                <FaFacebookF />
-              </a>
-              <a
-                href="login/google"
-                className="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"
-              >
-                <FaGooglePlusG />
-              </a>
-              <a
-                href="login//instagram"
-                className="btn-social btn-outline-instagram waves-effect btn-social-circle waves-light m-1"
-              >
-                <FaInstagram />
-              </a>
+              <SocialInstagramLogin />
+              <SocialGoogleLogin />
+              <SocialFacebookLogin />
             </div>
             <p className="text-muted text-center my-2">Or Be Classical</p>
 
@@ -169,22 +153,22 @@ const LoginForm = () => {
 
   const onSubmit = async (values, action) => {
     document.getElementById("dots").classList.add("d-none");
-      axios.post("api/register", values).then((response) => {
-        if (response.status === 200) {
-          localStorage.setItem("token", response.data.authorisation.token);
-          window.location = process.env.REACT_APP_HOME_PAGE;
-        } else if (response.status === 201) {
-          disableSubmitBtn = false;
-          let errors = response.data.validation_errors;
-          document.getElementById("dots").classList.remove("d-none");
-          for (const [key, value] of Object.entries(errors)) {
-            action.setFieldError(key, value);
-          }
-        } else {
-          disableSubmitBtn = false;
-          document.getElementById("dots").classList.remove("d-none");
-          toast.error("Api Server Error");
+    axios.post("api/register", values).then((response) => {
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.authorisation.token);
+        window.location = process.env.REACT_APP_HOME_PAGE;
+      } else if (response.status === 201) {
+        disableSubmitBtn = false;
+        let errors = response.data.validation_errors;
+        document.getElementById("dots").classList.remove("d-none");
+        for (const [key, value] of Object.entries(errors)) {
+          action.setFieldError(key, value);
         }
+      } else {
+        disableSubmitBtn = false;
+        document.getElementById("dots").classList.remove("d-none");
+        toast.error("Api Server Error");
+      }
     });
   };
 

@@ -5,14 +5,18 @@ import {
   FaEyeSlash,
   FaEye,
 } from "react-icons/fa";
-import {SocialInstagramLogin,SocialFacebookLogin,SocialGoogleLogin} from "../test";
+import {
+  SocialInstagramLogin,
+  SocialFacebookLogin,
+  SocialGoogleLogin,
+} from "../../components/sociallogin";
 import { MdFingerprint, MdEmail, MdPersonAdd } from "react-icons/md";
-import { useState, useEffect,useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
-import spinner from '../../assets/images/spinner.gif'
+import spinner from "../../assets/images/spinner.gif";
 
 export default function Register() {
   useEffect(() => {
@@ -85,24 +89,18 @@ export default function Register() {
         </nav>
         {/* <!-- End Navbar --> */}
 
-
         <div className="card card-mdb mx-2 card-login">
           <div className="card-header card-header-primary">
             <h5 className="text-center">Login With Social Account</h5>
-          
           </div>
           <div className="card-body">
-
-          <div className="social-line text-center">
-          <SocialInstagramLogin />
-            <SocialGoogleLogin />
-            <SocialFacebookLogin />
+            <div className="social-line text-center">
+              <SocialInstagramLogin />
+              <SocialGoogleLogin />
+              <SocialFacebookLogin />
             </div>
 
-
-            <div className="d-flex justify-content-center text-center">
-
-            </div>
+            <div className="d-flex justify-content-center text-center"></div>
             <p className="text-muted text-center my-2">Or Be Classical</p>
 
             <LoginForm />
@@ -156,18 +154,18 @@ const LoginForm = () => {
 
   const onSubmit = async (values, action) => {
     document.getElementById("dots").classList.remove("d-none");
-     await axios.post(`api/login`, values).then((response) => {
-        if (response.status === 200) {
-          localStorage.setItem("token", response.data.authorisation.token);
-          window.location = process.env.REACT_APP_HOME_PAGE;
-        } else if (response.status === 201) {
-          document.getElementById("dots").classList.remove("d-none");
-          action.setFieldError("email", response.data.message);
-          disableSubmitBtn = false;
-        } else {
-          disableSubmitBtn = false;
-          document.getElementById("dots").classList.remove("d-none");
-        }
+    await axios.post(`api/login`, values).then((response) => {
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.authorisation.token);
+        window.location = process.env.REACT_APP_HOME_PAGE;
+      } else if (response.status === 201) {
+        document.getElementById("dots").classList.remove("d-none");
+        action.setFieldError("email", response.data.message);
+        disableSubmitBtn = false;
+      } else {
+        disableSubmitBtn = false;
+        document.getElementById("dots").classList.remove("d-none");
+      }
     });
   };
 
@@ -257,7 +255,6 @@ const LoginForm = () => {
                     ... <img src={spinner} width="35" height="35" alt="" />
                   </span>
                 </button>
-                
               </div>
             </Form>
           );

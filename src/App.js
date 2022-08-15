@@ -14,11 +14,13 @@ import  ProtectedRoutes  from "./components/protectedRoutes";
 import AuthRoutes from "./components/AuthRoutes";
 function App() {
   return (
-    <BrowserRouter>
+<BrowserRouter>
     <Routes>
     <Route path="/" element={<AuthRoutes />}>
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
+     
+
       </Route>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />

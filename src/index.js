@@ -1,15 +1,17 @@
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from "./reportWebVitals";
 import "./assets/css/bootstrap.css";
 import "./assets/css/style.css";
-import React,{createContext} from "react";
+import React, { createContext } from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+
 import axios from "axios";
 import App from "./App";
-import useAuth from '../src/utili/useAuth';
+import useAuth from "../src/utili/useAuth";
+
 const queryClient = new QueryClient();
-const token =localStorage.getItem('token');
+const token = localStorage.getItem("token");
 
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 axios.defaults.withCredentials = true;
@@ -19,22 +21,18 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const auth=useAuth(token);
-const userContext=createContext();
-
-
-
+const auth = useAuth(token);
+const userContext = createContext();
 
 root.render(
   <QueryClientProvider client={queryClient}>
     <React.StrictMode>
       <userContext.Provider value={auth}>
-      <App />
+        <App />
       </userContext.Provider>
     </React.StrictMode>
-    <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    {/* <ReactQueryDevtools initialIsOpen={false} position="bottom-right" /> */}
   </QueryClientProvider>
-
 );
 
 // If you want to start measuring performance in your app, pass a function
@@ -42,5 +40,4 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-
-export {userContext}
+export { userContext };
