@@ -4,6 +4,7 @@ import FacebookLogin from "react-facebook-login";
 import InstagramLogin from "react-instagram-login";
 import { FaGooglePlusG, FaFacebookF, FaInstagram } from "react-icons/fa";
 import axios from "axios";
+
 const responseGoogle = async (response) => {
   let user = {
     provider: "google",
@@ -19,7 +20,6 @@ const responseGoogle = async (response) => {
     .post(`api/login/google`, user)
     .then((res) => {
       if ((res.statusText = "Logged in success")) {
-        // console.log(res);
         localStorage.setItem("token", res.data.authorisation.token);
         window.location = process.env.REACT_APP_HOME_PAGE;
       } else {
@@ -52,7 +52,7 @@ const responseFacebook = async (response) => {
     .then((res) => {
       if ((res.statusText = "Logged in success")) {
         localStorage.setItem("token", res.data.authorisation.token);
-        // console.log(res);
+        console.log(res);
         window.location = process.env.REACT_APP_HOME_PAGE;
       } else {
         console.log(res);
