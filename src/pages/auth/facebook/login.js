@@ -78,6 +78,7 @@ const LoginFacebook = () => {
   return (
     <div>
       <button onClick={statusChangeCallback}>Login with Facebook</button>
+      <div id="status"></div>
     </div>
   );
 };
