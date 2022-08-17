@@ -54,13 +54,9 @@ const LoginFacebook = () => {
   };
 
   function logout() {
-    checkLoginState(response);
-
-    console.log(response);
-
-    // FB.logout(function (response) {
-    //   console.log(response);
-    // });
+    FB.logout(function (response) {
+      console.log(response);
+    });
   }
   // Load the SDK asynchronously
   (function (d, s, id) {
