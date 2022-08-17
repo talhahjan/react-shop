@@ -10,7 +10,7 @@ const LoginFacebook = () => {
     // for FB.getLoginStatus().
     if (response.status === "connected") {
       // Logged into your app and Facebook.
-      testAPI();
+      //      testAPI();
     } else {
       // The person is not logged into your app or we are unable to tell.
       document.getElementById("status").innerHTML =
@@ -48,11 +48,16 @@ const LoginFacebook = () => {
     //
     // These three cases are handled in the callback function.
 
-    FB.getLoginStatus(function (response) {
-      statusChangeCallback(response);
-    });
+    // FB.getLoginStatus(function (response) {
+    //   statusChangeCallback(response);
+    // });
   };
 
+  function logout() {
+    FB.logout(function (response) {
+      console.log(response);
+    });
+  }
   // Load the SDK asynchronously
   (function (d, s, id) {
     var js,
@@ -78,6 +83,9 @@ const LoginFacebook = () => {
   return (
     <div>
       <button onClick={checkLoginState}>Login with Facebook</button>
+      <button className="d-block" onClick={logout}>
+        Logout
+      </button>
       <div id="status"></div>
     </div>
   );
