@@ -82,7 +82,7 @@ const LoginFacebook = () => {
 
   return (
     <div>
-      <button onClick={checkLoginState}>Login with Facebook</button>
+      <button onClick={statusChangeCallback}>Login with Facebook</button>
       <button className="d-block" onClick={logout}>
         Logout
       </button>
