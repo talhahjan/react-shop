@@ -1,43 +1,60 @@
 import { useState, useEffect } from "react";
 const LoginFacebook = () => {
-  function Login() {
-    FB.getLoginStatus(function (response) {
+  function logout() {
+    FB.getLoginStatus((response) => {
       if (response.status === "connected") {
-        // The user is logged in and has authenticated your
-        // app, and response.authResponse supplies
-        // the user's ID, a valid access token, a signed
-        // request, and the time the access token
-        // and signed request each expire.
-        var uid = response.authResponse.userID;
-        var accessToken = response.authResponse.accessToken;
-        console.log("userall ready loged In ", response);
-        testAPI();
-      } else if (response.status === "not_authorized") {
-        // The user hasn't authorized your application.  They
-        // must click the Login button, or you must call FB.login
-        // in response to a user gesture, to launch a login dialog.
-        console.log("user is not loged In ", response);
-        FB.login();
-        console.log("user Loged id by call fb.login method ", response);
-        testAPI();
+        FB.logout();
       } else {
-        // The user isn't logged in to Facebook. You can launch a
-        // login dialog with a user gesture, but the user may have
-        // to log in to Facebook before authorizing your application.
-        console.log("user not logged In try failed");
+        console.log("user not logged in");
       }
     });
   }
 
-  // This is called with the results from from FB.getLoginStatus().
-  // Load the SDK asynchronously
+  function login() {
+    FB.getLoginStatus(function (response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  function statusChangeCallback(response) {
+    console.log("statusChangeCallback");
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === "connected") {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else {
+      // The person is not logged into your app or we are unable to tell.
+      document.getElementById("status").innerHTML =
+        "Please log " + "into this app.";
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function (response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  function testAPI() {
+    FB.api("/me?fields=id,name,email,picture", function (response) {
+      console.log(response);
+    });
+  }
+
   useEffect(() => {
     window.fbAsyncInit = () => {
       window.FB.init({
         appId: process.env.REACT_APP_FACEBOOK_APP_ID,
         autoLogAppEvents: true,
         xfbml: true,
-        version: "v14.0",
+        version: "v11.0",
       });
     };
     (function (d, s, id) {
@@ -53,25 +70,17 @@ const LoginFacebook = () => {
     })(document, "script", "facebook-jssdk");
   }, []);
 
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    console.log("Welcome!  Fetching your information.... ");
-    FB.api("/me", function (response) {
-      console.log("Successful login for: " + response.name);
-      document.getElementById("status").innerHTML =
-        "Thanks for logging in, " + response.name + "!";
-    });
-  }
-
   return (
     <div>
-      <button onClick={Login}>Login with Facebook</button>
-      {/* <button className="d-block" onClick={logout}>
-        Logout
-      </button> */}
+      <button className="btn btn-danger d-block m-2" onClick={login}>
+        Login with Facebook
+      </button>
+      <button className="btn btn-danger d-block m-2" onClick={logout}>
+        logout
+      </button>
       <div id="status"></div>
     </div>
   );
 };
+
 export default LoginFacebook;
