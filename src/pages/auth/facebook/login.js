@@ -1,63 +1,35 @@
 import { useState, useEffect } from "react";
 const LoginFacebook = () => {
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log("statusChangeCallback");
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === "connected") {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else {
-      // The person is not logged into your app or we are unable to tell.
-      document.getElementById("status").innerHTML =
-        "Please log " + "into this app.";
-    }
-  }
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
+  function Login() {
     FB.getLoginStatus(function (response) {
-      statusChangeCallback(response);
+      if (response.status === "connected") {
+        // The user is logged in and has authenticated your
+        // app, and response.authResponse supplies
+        // the user's ID, a valid access token, a signed
+        // request, and the time the access token
+        // and signed request each expire.
+        var uid = response.authResponse.userID;
+        var accessToken = response.authResponse.accessToken;
+        console.log("user all ready loged In ", response);
+        testAPI();
+      } else if (response.status === "not_authorized") {
+        // The user hasn't authorized your application.  They
+        // must click the Login button, or you must call FB.login
+        // in response to a user gesture, to launch a login dialog.
+        console.log("user is not loged In ", response);
+        FB.login();
+        console.log("user Loged id by call fb.login method ", response);
+        testAPI();
+      } else {
+        // The user isn't logged in to Facebook. You can launch a
+        // login dialog with a user gesture, but the user may have
+        // to log in to Facebook before authorizing your application.
+        console.log("user not logged In try failed");
+      }
     });
   }
 
-  window.fbAsyncInit = function () {
-    FB.init({
-      appId: process.env.REACT_APP_FACEBOOK_APP_ID,
-      cookie: true, // enable cookies to allow the server to access
-      // the session
-      xfbml: true, // parse social plugins on this page
-      version: "v14.0", // Specify the Graph API version to use
-    });
-
-    // Now that we've initialized the JavaScript SDK, we call
-    // FB.getLoginStatus().  This function gets the state of the
-    // person visiting this page and can return one of three states to
-    // the callback you provide.  They can be:
-    //
-    // 1. Logged into your app ('connected')
-    // 2. Logged into Facebook, but not your app ('not_authorized')
-    // 3. Not logged into Facebook and can't tell if they are logged into
-    //    your app or not.
-    //
-    // These three cases are handled in the callback function.
-
-    // FB.getLoginStatus(function (response) {
-    //   statusChangeCallback(response);
-    // });
-  };
-
-  function logout() {
-    FB.logout(function (response) {
-      console.log(response);
-    });
-  }
+  // This is called with the results from from FB.getLoginStatus().
   // Load the SDK asynchronously
   (function (d, s, id) {
     var js,
@@ -82,10 +54,10 @@ const LoginFacebook = () => {
 
   return (
     <div>
-      <button onClick={statusChangeCallback}>Login with Facebook</button>
-      <button className="d-block" onClick={logout}>
+      <button onClick={Login}>Login with Facebook</button>
+      {/* <button className="d-block" onClick={logout}>
         Logout
-      </button>
+      </button> */}
       <div id="status"></div>
     </div>
   );
