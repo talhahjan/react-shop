@@ -37,7 +37,7 @@ const LoginFacebook = () => {
         appId: process.env.REACT_APP_FACEBOOK_APP_ID,
         autoLogAppEvents: true,
         xfbml: true,
-        version: "v11.0",
+        version: "v14.0",
       });
     };
     (function (d, s, id) {
