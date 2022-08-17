@@ -29,11 +29,11 @@ const LoginFacebook = () => {
 
   window.fbAsyncInit = function () {
     FB.init({
-      appId: "{your-app-id}",
+      appId: process.env.REACT_APP_FACEBOOK_APP_ID,
       cookie: true, // enable cookies to allow the server to access
       // the session
       xfbml: true, // parse social plugins on this page
-      version: "{api-version}", // Specify the Graph API version to use
+      version: "v14.0", // Specify the Graph API version to use
     });
 
     // Now that we've initialized the JavaScript SDK, we call
@@ -77,7 +77,7 @@ const LoginFacebook = () => {
 
   return (
     <div>
-      <button onClick={checkLoginState}>Login with Facebook</button>
+      <button onClick={statusChangeCallback}>Login with Facebook</button>
     </div>
   );
 };
