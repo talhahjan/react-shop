@@ -1,15 +1,5 @@
 import { useState, useEffect } from "react";
 const LoginFacebook = () => {
- useEffect(() => {
-        window.fbAsyncInit = () => {
-            window.FB.init({
-                appId            : process.env.REACT_APP_FACEBOOK_APP_ID,
-                autoLogAppEvents : true,
-                xfbml            : true,
-                version          : 'v11.0'
-            });
-        };
-
   function Login() {
     FB.getLoginStatus(function (response) {
       if (response.status === "connected") {
@@ -41,15 +31,27 @@ const LoginFacebook = () => {
 
   // This is called with the results from from FB.getLoginStatus().
   // Load the SDK asynchronously
-  (function (d, s, id) {
-    var js,
-      fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  })(document, "script", "facebook-jssdk");
+  useEffect(() => {
+    window.fbAsyncInit = () => {
+      window.FB.init({
+        appId: process.env.REACT_APP_FACEBOOK_APP_ID,
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: "v11.0",
+      });
+    };
+    (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+  }, []);
 
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
