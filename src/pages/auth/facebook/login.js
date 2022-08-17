@@ -1,5 +1,15 @@
 import { useState, useEffect } from "react";
 const LoginFacebook = () => {
+ useEffect(() => {
+        window.fbAsyncInit = () => {
+            window.FB.init({
+                appId            : process.env.REACT_APP_FACEBOOK_APP_ID,
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v11.0'
+            });
+        };
+
   function Login() {
     FB.getLoginStatus(function (response) {
       if (response.status === "connected") {
@@ -10,7 +20,7 @@ const LoginFacebook = () => {
         // and signed request each expire.
         var uid = response.authResponse.userID;
         var accessToken = response.authResponse.accessToken;
-        console.log("user all ready loged In ", response);
+        console.log("userall ready loged In ", response);
         testAPI();
       } else if (response.status === "not_authorized") {
         // The user hasn't authorized your application.  They
