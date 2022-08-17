@@ -10,7 +10,7 @@ const LoginFacebook = () => {
     // for FB.getLoginStatus().
     if (response.status === "connected") {
       // Logged into your app and Facebook.
-      //      testAPI();
+      testAPI();
     } else {
       // The person is not logged into your app or we are unable to tell.
       document.getElementById("status").innerHTML =
@@ -54,9 +54,13 @@ const LoginFacebook = () => {
   };
 
   function logout() {
-    FB.logout(function (response) {
-      console.log(response);
-    });
+    checkLoginState(response);
+
+    console.log(response);
+
+    // FB.logout(function (response) {
+    //   console.log(response);
+    // });
   }
   // Load the SDK asynchronously
   (function (d, s, id) {
