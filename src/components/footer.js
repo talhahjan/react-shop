@@ -1,6 +1,6 @@
 import { MdFavorite, MdAccountCircle, MdLocalMall } from "react-icons/md";
 import { FaFacebookF, FaYoutube, FaInstagram, FaTwitter } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 const FooterSm = () => {
   return (
     <>

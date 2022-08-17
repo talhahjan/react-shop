@@ -20,6 +20,7 @@ const Header = () => {
 
   const logout = () => {
     localStorage.clear();
+    sessionStorage.clear();
     window.location.reload(false);
   };
 

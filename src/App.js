@@ -5,7 +5,7 @@ import Section from "./pages/collection/section";
 import Category from "./pages/collection/category";
 import Product from "./pages/collection/product";
 import Login from "./pages/auth/login";
-import Login1 from "./pages/test";
+import LoginFacebook from "./pages/auth/facebook/login";
 import Logout from "./pages/auth/logout";
 import Register from "./pages/auth/register";
 import Profile from "./pages/user/profile";
@@ -17,7 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/test" element={<Login1 />} />
+        <Route path="/login/facebook" element={<LoginFacebook />} />
         <Route path="/" element={<AuthRoutes />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
