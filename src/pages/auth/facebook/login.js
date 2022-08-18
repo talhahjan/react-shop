@@ -9,6 +9,10 @@ const FacebookLoginBtn = (props) => {
   const onSuccess = props.onSuccess;
   const onError = props.onError;
   function login() {
+    if (FB.getAuthResponse()) {
+      return onError("user All Ready Logged in");
+    }
+
     try {
       FB.login(function (response) {
         console.log("user Logged In successfully");
