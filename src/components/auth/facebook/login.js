@@ -9,8 +9,7 @@ const FacebookLogin = (props) => {
 
     FB.login(function (response) {
       if (response.authResponse) {
-        FB.api(`/me?fields=email,name,picture`, function (response) {
-          console.log(response);
+        FB.api(`/me?fields=id,name,email,picture`, function (response) {
           LoginInbackend(response);
         });
       } else {
@@ -41,8 +40,8 @@ const FacebookLogin = (props) => {
       .then((res) => {
         console.log(res);
         if ((res.statusText = "Logged in success")) {
-          // localStorage.setItem("token", res.data.authorisation.token);
-          // window.location = process.env.REACT_APP_HOME_PAGE;
+          localStorage.setItem("token", res.data.authorisation.token);
+          window.location = process.env.REACT_APP_HOME_PAGE;
         } else {
           console.log(res);
         }
