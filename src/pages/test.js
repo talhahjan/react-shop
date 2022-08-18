@@ -1,5 +1,6 @@
 import React from "react";
 import FacebookLoginBtn from "../pages/auth/facebook/login";
+import axios from "axios";
 export const FacebookLogin = () => {
   const onSuccess = async (response) => {
     console.log(response);
