@@ -38,10 +38,10 @@ const FacebookLogin = (props) => {
     await axios
       .post(`api/login/facebook`, user)
       .then((res) => {
+        console.log(res);
         if ((res.statusText = "Logged in success")) {
-          localStorage.setItem("token", res.data.authorisation.token);
-          console.log(res);
-          window.location = process.env.REACT_APP_HOME_PAGE;
+          // localStorage.setItem("token", res.data.authorisation.token);
+          // window.location = process.env.REACT_APP_HOME_PAGE;
         } else {
           console.log(res);
         }
