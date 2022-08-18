@@ -1,24 +1,12 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-
-const getdata = async () => {
-  await axios
-    .get(`https://graph.facebook.com/v14.0/me?fields=id%2Cname`)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
+import React from "react";
+import FacebookLoginBtn from "../pages/auth/facebook/login";
+export const FacebookLogin = () => {
+  const onSuccess = async (response) => {
+    console.log(response);
+  };
+  return (
+    <FacebookLoginBtn cssClass="btn btn-primary " onSuccess={onSuccess}>
+      Login With FB
+    </FacebookLoginBtn>
+  );
 };
-
-const Login1 = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    getdata();
-  }, []);
-
-  return <div>Login</div>;
-};
-export default Login1;

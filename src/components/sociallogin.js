@@ -1,7 +1,4 @@
 import React from "react";
-import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login";
-import InstagramLogin from "react-instagram-login";
 import { FaGooglePlusG, FaFacebookF, FaInstagram } from "react-icons/fa";
 import axios from "axios";
 
@@ -35,7 +32,7 @@ const errorGoogle = (error) => {
   console.log("error", error);
 };
 
-const responseFacebook = async (response) => {
+const LoginInbackend = async (response) => {
   let names = response.name.split(" ");
   let user = {
     provider: "facebook",

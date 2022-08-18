@@ -1,52 +1,58 @@
-import { useState, useEffect } from "react";
-const LoginFacebook = () => {
-  function logout() {
-    FB.getLoginStatus((response) => {
-      if (response.status === "connected") {
-        FB.logout();
-      } else {
-        console.log("user not logged in");
-      }
-    });
-  }
-
+import { useEffect } from "react";
+import axios from "axios";
+import { Outlet, Navigate } from "react-router-dom";
+const FacebookLoginBtn = (props) => {
+  const cssClass = props.cssClass ? props.cssClass : "btn";
+  const appID = props.appID
+    ? props.appID
+    : process.env.REACT_APP_FACEBOOK_APP_iD;
+  const onSuccess = props.onSuccess;
   function login() {
-    FB.getLoginStatus(function (response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  function statusChangeCallback(response) {
-    console.log("statusChangeCallback");
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === "connected") {
-      // Logged into your app and Facebook.
-      testAPI();
+    if (FB.getAuthResponse()) {
+      console.log("user allready logged In");
     } else {
-      // The person is not logged into your app or we are unable to tell.
-      document.getElementById("status").innerHTML =
-        "Please log " + "into this app.";
+      FB.login(function (response) {
+        console.log("user Logged In successfully");
+        console.log(response.authResponse.userID);
+        testAPI();
+      });
     }
   }
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function (response) {
-      statusChangeCallback(response);
+  function testAPI() {
+    FB.api(`/me?fields=email,name,picture`, function (response) {
+      onSuccess(response);
     });
   }
 
-  function testAPI() {
-    FB.api("/me?fields=id,name,email,picture", function (response) {
-      console.log(response);
-    });
-  }
+  const LoginInbackend = async (response) => {
+    let names = response.name.split(" ");
+    let user = {
+      provider: "facebook",
+      provider_id: response.id,
+
+      email: response.email,
+      first_name: names[0],
+      last_name: names[1],
+      avatar: response.picture.data.url,
+      jwt: response.accessToken,
+    };
+
+    await axios
+      .get(`api/login/facebook`, user)
+      .then((res) => {
+        if ((res.statusText = "Logged in success")) {
+          localStorage.setItem("token", res.data.authorisation.token);
+          console.log(res);
+          window.location = process.env.REACT_APP_HOME_PAGE;
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     window.fbAsyncInit = () => {
@@ -54,7 +60,7 @@ const LoginFacebook = () => {
         appId: process.env.REACT_APP_FACEBOOK_APP_ID,
         autoLogAppEvents: true,
         xfbml: true,
-        version: "v11.0",
+        version: "v14.0",
       });
     };
     (function (d, s, id) {
@@ -71,16 +77,10 @@ const LoginFacebook = () => {
   }, []);
 
   return (
-    <div>
-      <button className="btn btn-danger d-block m-2" onClick={login}>
-        Login with Facebook
-      </button>
-      <button className="btn btn-danger d-block m-2" onClick={logout}>
-        logout
-      </button>
-      <div id="status"></div>
-    </div>
+    <button className={cssClass} onClick={login}>
+      {props.children}
+    </button>
   );
 };
 
-export default LoginFacebook;
+export default FacebookLoginBtn;

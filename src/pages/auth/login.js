@@ -5,13 +5,8 @@ import {
   FaEyeSlash,
   FaEye,
 } from "react-icons/fa";
-import {
-  SocialInstagramLogin,
-  SocialFacebookLogin,
-  SocialGoogleLogin,
-} from "../../components/sociallogin";
 import { MdFingerprint, MdEmail, MdPersonAdd } from "react-icons/md";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -94,11 +89,7 @@ export default function Register() {
             <h5 className="text-center">Login With Social Account</h5>
           </div>
           <div className="card-body">
-            <div className="social-line text-center">
-              <SocialInstagramLogin />
-              <SocialGoogleLogin />
-              <SocialFacebookLogin />
-            </div>
+            <div className="social-line text-center"></div>
 
             <div className="d-flex justify-content-center text-center"></div>
             <p className="text-muted text-center my-2">Or Be Classical</p>

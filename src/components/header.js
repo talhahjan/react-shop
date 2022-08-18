@@ -1,8 +1,3 @@
-import {
-  SocialInstagramLogin,
-  SocialFacebookLogin,
-  SocialGoogleLogin,
-} from "../components/sociallogin";
 import { useContext } from "react";
 import { FaBars } from "react-icons/fa";
 import {
@@ -181,11 +176,7 @@ const Header = () => {
                                 Use Social Accounts
                               </p>
                             </div>
-                            <div className="social-line text-center">
-                              <SocialInstagramLogin />
-                              <SocialGoogleLogin />
-                              <SocialFacebookLogin />
-                            </div>
+                            <div className="social-line text-center"></div>
                             <br />
                             <p className="text-muted mb-2 text-left">
                               <Link to="/register">New customer ?</Link>
