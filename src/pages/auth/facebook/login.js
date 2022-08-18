@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import axios from "axios";
-import { Outlet, Navigate } from "react-router-dom";
 const FacebookLoginBtn = (props) => {
-  const cssClass = props.cssClass ? props.cssClass : "btn";
+  const cssClass = props.cssClass ? props.cssClass : "";
   const appID = props.appID
     ? props.appID
     : process.env.REACT_APP_FACEBOOK_APP_iD;
@@ -25,7 +24,7 @@ const FacebookLoginBtn = (props) => {
   }
 
   function testAPI() {
-    FB.api(`/me?fields=email,name,picture`, function (response) {
+    FB.api(`/me?fields=email,name,picture,location, function (response) {
       onSuccess(response);
     });
   }
