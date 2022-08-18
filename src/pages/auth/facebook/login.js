@@ -7,16 +7,23 @@ const FacebookLoginBtn = (props) => {
     ? props.appID
     : process.env.REACT_APP_FACEBOOK_APP_iD;
   const onSuccess = props.onSuccess;
+  const onError = props.onError;
   function login() {
     if (FB.getAuthResponse()) {
-      console.log("user allready logged In");
-    } else {
-      FB.login(function (response) {
+      onError('user All Ready Logged In');
+
+
+      try {
+        FB.login(function (response) {
         console.log("user Logged In successfully");
         console.log(response.authResponse.userID);
         testAPI();
       });
+      }
+      catch (error){
+        onError(error)
     }
+      
   }
 
   function testAPI() {
@@ -25,34 +32,6 @@ const FacebookLoginBtn = (props) => {
     });
   }
 
-  const LoginInbackend = async (response) => {
-    let names = response.name.split(" ");
-    let user = {
-      provider: "facebook",
-      provider_id: response.id,
-
-      email: response.email,
-      first_name: names[0],
-      last_name: names[1],
-      avatar: response.picture.data.url,
-      jwt: response.accessToken,
-    };
-
-    await axios
-      .get(`api/login/facebook`, user)
-      .then((res) => {
-        if ((res.statusText = "Logged in success")) {
-          localStorage.setItem("token", res.data.authorisation.token);
-          console.log(res);
-          window.location = process.env.REACT_APP_HOME_PAGE;
-        } else {
-          console.log(res);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   useEffect(() => {
     window.fbAsyncInit = () => {
