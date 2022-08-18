@@ -1,36 +1,22 @@
 import { useEffect } from "react";
 import axios from "axios";
-const FacebookLoginBtn = (props) => {
+const FacebookLogin = (props) => {
   const cssClass = props.cssClass ? props.cssClass : "";
-  const appID = props.appID
-    ? props.appID
-    : process.env.REACT_APP_FACEBOOK_APP_iD;
   function login() {
     if (FB.getAuthResponse()) {
       return onError("user All Ready Logged in");
     }
 
-    try {
-      FB.login(function (response) {
-        console.log("user Logged In successfully");
-        console.log(response.authResponse.userID);
-        testAPI();
-      });
-    } catch (error) {
-      onerror(error);
-    }
-  }
-
-  function testAPI() {
-    FB.api(`/me?fields=email,name,picture,location`, function (response) {
-      onSuccess(response);
+    FB.login(function (response) {
+      if (response.authResponse) {
+        FB.api(`/me?fields=email,name,picture`, function (response) {
+          LoginInbackend(response);
+        });
+      } else {
+        onError("User cancelled login or did not fully authorize.");
+      }
     });
   }
-
-  const onSuccess = async (response) => {
-    console.log(response);
-    LoginInbackend(response);
-  };
 
   const onError = async (error) => {
     console.log(error);
@@ -94,4 +80,4 @@ const FacebookLoginBtn = (props) => {
   );
 };
 
-export default FacebookLoginBtn;
+export default FacebookLogin;

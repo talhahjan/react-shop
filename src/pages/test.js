@@ -1,10 +1,7 @@
 import React from "react";
-import FacebookLoginBtn from "../pages/auth/facebook/login";
-import axios from "axios";
-export const FacebookLogin = () => {
+import FacebookLogin from "../components/auth/facebook/login";
+export const FacebookLoginBtn = () => {
   return (
-    <FacebookLoginBtn cssClass="btn btn-primary">
-      Login With FB
-    </FacebookLoginBtn>
+    <FacebookLogin cssClass="btn btn-primary">Login With FB</FacebookLogin>
   );
 };

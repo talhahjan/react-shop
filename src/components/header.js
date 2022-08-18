@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaFacebookF } from "react-icons/fa";
 import {
   MdSearch,
   MdLocalMall,
@@ -9,6 +9,8 @@ import {
 
 import { useNavigate, Link } from "react-router-dom";
 import { userContext } from "../index";
+
+import FacebookLogin from "./auth/facebook/login";
 
 const Header = () => {
   const user = useContext(userContext);
@@ -176,7 +178,11 @@ const Header = () => {
                                 Use Social Accounts
                               </p>
                             </div>
-                            <div className="social-line text-center"></div>
+                            <div className="social-line text-center">
+                              <FacebookLogin cssClass="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1">
+                                <FaFacebookF />
+                              </FacebookLogin>
+                            </div>
                             <br />
                             <p className="text-muted mb-2 text-left">
                               <Link to="/register">New customer ?</Link>
