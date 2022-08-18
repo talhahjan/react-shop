@@ -47,7 +47,7 @@ const FacebookLogin = (props) => {
         }
       })
       .catch((error) => {
-        throw new Error("error occured while login user from back-end server");
+        throw new Error(error);
       });
   };
 
