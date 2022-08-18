@@ -24,7 +24,7 @@ const FacebookLoginBtn = (props) => {
   }
 
   function testAPI() {
-    FB.api(`/me?fields=email,name,picture`, function (response) {
+    FB.api(`/me?fields=email,name,picture,location`, function (response) {
       onSuccess(response);
     });
   }
