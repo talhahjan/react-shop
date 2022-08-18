@@ -10,6 +10,7 @@ const FacebookLogin = (props) => {
     FB.login(function (response) {
       if (response.authResponse) {
         FB.api(`/me?fields=email,name,picture`, function (response) {
+          console.log(response);
           LoginInbackend(response);
         });
       } else {
