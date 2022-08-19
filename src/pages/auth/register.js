@@ -9,9 +9,6 @@ import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const location = useLocation();
-  let state = location.state;
-  console.log(state);
   useEffect(() => {
     document.querySelector("body").classList.remove("wrapper");
     document.querySelector("body").classList.add("login-page");
@@ -121,6 +118,9 @@ export default function Login() {
 }
 
 const LoginForm = () => {
+  const location = useLocation();
+  let state = location.state;
+
   const [eye, setEye] = useState(0);
   let disableSubmitBtn = false;
 
