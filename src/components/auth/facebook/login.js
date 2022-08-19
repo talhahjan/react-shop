@@ -23,8 +23,8 @@ const FacebookLogin = (props) => {
             jwt: response.accessToken,
           };
 
-          if (email) LoginBackend(user);
-          else navigate("/register", { state: user });
+          if (response.email) return LoginBackend(user);
+          else return navigate("/register", { state: user });
         });
       } else {
         onError("User cancelled login or did not fully authorize.");
@@ -34,10 +34,10 @@ const FacebookLogin = (props) => {
 
   const LoginBackend = async (user) => {
     await axios
-      .post(`api/login/google`, user)
+      .post(`api/login/facebook`, user)
       .then((res) => {
         if ((res.statusText = "Logged in success")) {
-          localStorage.setItem("token", res.data.authorisation.token);
+          localStorage.setItem("token", res.data.authorization.token);
           console.log(res);
           window.location = process.env.REACT_APP_HOME_PAGE;
         } else {
@@ -45,7 +45,7 @@ const FacebookLogin = (props) => {
         }
       })
       .catch((error) => {
-        throw new Error("error occured while login user from back-end server");
+        throw new Error("error occurred while login user from back-end server");
       });
   };
 
