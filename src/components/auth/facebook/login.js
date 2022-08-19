@@ -10,7 +10,7 @@ const FacebookLogin = (props) => {
     FB.login(function (response) {
       if (response.authResponse) {
         FB.api(`/me?fields=id,name,email,picture`, function (response) {
-          LoginInbackend(response);
+          //  LoginBackend(response);
         });
       } else {
         onError("User cancelled login or did not fully authorize.");
@@ -22,7 +22,7 @@ const FacebookLogin = (props) => {
     console.log(error);
   };
 
-  const LoginInbackend = async (response) => {
+  const LoginBackend = async (response) => {
     let names = response.name.split(" ");
     let user = {
       provider: "facebook",
@@ -40,7 +40,7 @@ const FacebookLogin = (props) => {
       .then((res) => {
         console.log(res);
         if ((res.statusText = "Logged in success")) {
-          localStorage.setItem("token", res.data.authorisation.token);
+          localStorage.setItem("token", res.data.authorization.token);
           window.location = process.env.REACT_APP_HOME_PAGE;
         } else {
           console.log(res);
