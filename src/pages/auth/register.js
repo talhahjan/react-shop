@@ -173,8 +173,8 @@ const LoginForm = () => {
     last_name: state.last_name ? state.last_name : "",
     email: state.email ? state.email : "",
     avatar: state.avatar ? state.avatar : "",
-    provider: state.provider ? state.provider ? '',
-    providerID: state.providerID ? state.providerID ? '',
+    provider: state.provider ? state.provider : "",
+    providerID: state.providerID ? state.providerID : "",
     password: "",
     password_confirmation: "",
   };
