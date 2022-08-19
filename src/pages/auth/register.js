@@ -169,11 +169,14 @@ const LoginForm = () => {
   };
 
   const initialValues = {
-    first_name: "Muhammad",
-    last_name: "Khalid",
-    email: "talhah.jan@gmail.com",
-    password: "password",
-    password_confirmation: "password",
+    first_name: state.first_name ? state.first_name : "",
+    last_name: state.last_name ? state.last_name : "",
+    email: state.email ? state.email : "",
+    avatar: state.avatar ? state.avatar : "",
+    provider: state.provider ? state.provider ? '',
+    providerID: state.providerID ? state.providerID ? '',
+    password: "",
+    password_confirmation: "",
   };
 
   return (

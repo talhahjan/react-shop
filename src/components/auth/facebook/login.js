@@ -12,7 +12,18 @@ const FacebookLogin = (props) => {
     FB.login(function (response) {
       if (response.authResponse) {
         FB.api(`/me?fields=id,name,email,picture`, function (response) {
-          navigate("/register", { state: response });
+          let names = response.name.split(" ");
+          let user = {
+            provider: "facebook",
+            provider_id: response.id,
+            email: response.email,
+            first_name: names[0],
+            last_name: names[1],
+            avatar: response.picture.data.url,
+            jwt: response.accessToken,
+          };
+
+          navigate("/register", { state: user });
           //  LoginBackend(response);
         });
       } else {
@@ -23,34 +34,6 @@ const FacebookLogin = (props) => {
 
   const onError = async (error) => {
     console.log(error);
-  };
-
-  const LoginBackend = async (response) => {
-    let names = response.name.split(" ");
-    let user = {
-      provider: "facebook",
-      provider_id: response.id,
-      email: response.email,
-      first_name: names[0],
-      last_name: names[1],
-      avatar: response.picture.data.url,
-      jwt: response.accessToken,
-    };
-
-    await axios
-      .post(`api/login/facebook`, user)
-      .then((res) => {
-        console.log(res);
-        if ((res.statusText = "Logged in success")) {
-          localStorage.setItem("token", res.data.authorization.token);
-          window.location = process.env.REACT_APP_HOME_PAGE;
-        } else {
-          console.log(res);
-        }
-      })
-      .catch((error) => {
-        throw new Error(error);
-      });
   };
 
   useEffect(() => {
