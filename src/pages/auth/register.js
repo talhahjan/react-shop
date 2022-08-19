@@ -151,7 +151,7 @@ const LoginForm = () => {
     document.getElementById("dots").classList.add("d-none");
     axios.post("api/register", values).then((response) => {
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.authorisation.token);
+        localStorage.setItem("token", response.data.authorization.token);
         window.location = process.env.REACT_APP_HOME_PAGE;
       } else if (response.status === 201) {
         disableSubmitBtn = false;
