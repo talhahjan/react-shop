@@ -1,9 +1,4 @@
 import { FaEyeSlash, FaEye } from "react-icons/fa";
-import {
-  SocialInstagramLogin,
-  SocialFacebookLogin,
-  SocialGoogleLogin,
-} from "../../components/sociallogin";
 import { ToastContainer, toast } from "react-toastify";
 import { MdFingerprint, MdEmail, MdPersonAdd, MdFace } from "react-icons/md";
 import { useState, useEffect } from "react";
@@ -87,11 +82,7 @@ export default function Login() {
             <h5 className="text-center">Login With Social Account</h5>
           </div>
           <div className="card-body">
-            <div className="social-line text-center">
-              <SocialInstagramLogin />
-              <SocialGoogleLogin />
-              <SocialFacebookLogin />
-            </div>
+            <div className="social-line text-center"></div>
             <p className="text-muted text-center my-2">Or Be Classical</p>
 
             <LoginForm />
