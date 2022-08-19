@@ -23,14 +23,31 @@ const FacebookLogin = (props) => {
             jwt: response.accessToken,
           };
 
-          navigate("/register", { state: user });
-          //  LoginBackend(response);
+          if (email) LoginBackend(user);
+          else navigate("/register", { state: user });
         });
       } else {
         onError("User cancelled login or did not fully authorize.");
       }
     });
   }
+
+  const LoginBackend = async (user) => {
+    await axios
+      .post(`api/login/google`, user)
+      .then((res) => {
+        if ((res.statusText = "Logged in success")) {
+          localStorage.setItem("token", res.data.authorisation.token);
+          console.log(res);
+          window.location = process.env.REACT_APP_HOME_PAGE;
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((error) => {
+        throw new Error("error occured while login user from back-end server");
+      });
+  };
 
   const onError = async (error) => {
     console.log(error);
