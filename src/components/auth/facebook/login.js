@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const FacebookLogin = (props) => {
-  let navigate = Navigate();
-
+  const navigate = useNavigate();
   const cssClass = props.cssClass ? props.cssClass : "";
   function login() {
     if (FB.getAuthResponse()) {
@@ -13,8 +12,8 @@ const FacebookLogin = (props) => {
     FB.login(function (response) {
       if (response.authResponse) {
         FB.api(`/me?fields=id,name,email,picture`, function (response) {
-          console.log("🚀 ~ file: login.js ~ line 13 ~ response", response);
-          navigate("/register", { state: response });
+          navigate("/user/profile", { state: response });
+          //  LoginBackend(response);
         });
       } else {
         onError("User cancelled login or did not fully authorize.");
