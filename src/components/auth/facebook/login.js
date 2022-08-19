@@ -10,7 +10,8 @@ const FacebookLogin = (props) => {
     FB.login(function (response) {
       if (response.authResponse) {
         FB.api(`/me?fields=id,name,email,picture`, function (response) {
-          //  LoginBackend(response);
+          console.log("🚀 ~ file: login.js ~ line 13 ~ response", response);
+          LoginBackend(response);
         });
       } else {
         onError("User cancelled login or did not fully authorize.");
@@ -27,7 +28,6 @@ const FacebookLogin = (props) => {
     let user = {
       provider: "facebook",
       provider_id: response.id,
-
       email: response.email,
       first_name: names[0],
       last_name: names[1],
