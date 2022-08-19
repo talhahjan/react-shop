@@ -12,7 +12,7 @@ const FacebookLogin = (props) => {
     FB.login(function (response) {
       if (response.authResponse) {
         FB.api(`/me?fields=id,name,email,picture`, function (response) {
-          navigate("/user/profile", { state: response });
+          navigate("/", { state: response });
           //  LoginBackend(response);
         });
       } else {
