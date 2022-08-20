@@ -121,6 +121,12 @@ const LoginForm = () => {
   const location = useLocation();
   let state = location.state;
 
+  if (state)
+    toast(
+      "info",
+      "Facebook Account did not provide email address please fill the email id tp procced"
+    );
+
   const [eye, setEye] = useState(0);
   let disableSubmitBtn = false;
 
@@ -148,25 +154,24 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (values, action) => {
-    console.log(values);
     document.getElementById("dots").classList.add("d-none");
-    // axios.post("api/register", values).then((response) => {
-    //   if (response.status === 200) {
-    //     localStorage.setItem("token", response.data.authorization.token);
-    //     window.location = process.env.REACT_APP_HOME_PAGE;
-    //   } else if (response.status === 201) {
-    //     disableSubmitBtn = false;
-    //     let errors = response.data.validation_errors;
-    //     document.getElementById("dots").classList.remove("d-none");
-    //     for (const [key, value] of Object.entries(errors)) {
-    //       action.setFieldError(key, value);
-    //     }
-    //   } else {
-    //     disableSubmitBtn = false;
-    //     document.getElementById("dots").classList.remove("d-none");
-    //     toast.error("Api Server Error");
-    //   }
-    // });
+    axios.post("api/register", values).then((response) => {
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.authorization.token);
+        window.location = process.env.REACT_APP_HOME_PAGE;
+      } else if (response.status === 201) {
+        disableSubmitBtn = false;
+        let errors = response.data.validation_errors;
+        document.getElementById("dots").classList.remove("d-none");
+        for (const [key, value] of Object.entries(errors)) {
+          action.setFieldError(key, value);
+        }
+      } else {
+        disableSubmitBtn = false;
+        document.getElementById("dots").classList.remove("d-none");
+        toast.error("Api Server Error");
+      }
+    });
   };
 
   const initialValues = {
