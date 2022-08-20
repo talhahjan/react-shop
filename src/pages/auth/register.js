@@ -6,7 +6,7 @@ import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function Login() {
   useEffect(() => {
@@ -148,24 +148,25 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (values, action) => {
+    console.log(values);
     document.getElementById("dots").classList.add("d-none");
-    axios.post("api/register", values).then((response) => {
-      if (response.status === 200) {
-        localStorage.setItem("token", response.data.authorization.token);
-        window.location = process.env.REACT_APP_HOME_PAGE;
-      } else if (response.status === 201) {
-        disableSubmitBtn = false;
-        let errors = response.data.validation_errors;
-        document.getElementById("dots").classList.remove("d-none");
-        for (const [key, value] of Object.entries(errors)) {
-          action.setFieldError(key, value);
-        }
-      } else {
-        disableSubmitBtn = false;
-        document.getElementById("dots").classList.remove("d-none");
-        toast.error("Api Server Error");
-      }
-    });
+    // axios.post("api/register", values).then((response) => {
+    //   if (response.status === 200) {
+    //     localStorage.setItem("token", response.data.authorization.token);
+    //     window.location = process.env.REACT_APP_HOME_PAGE;
+    //   } else if (response.status === 201) {
+    //     disableSubmitBtn = false;
+    //     let errors = response.data.validation_errors;
+    //     document.getElementById("dots").classList.remove("d-none");
+    //     for (const [key, value] of Object.entries(errors)) {
+    //       action.setFieldError(key, value);
+    //     }
+    //   } else {
+    //     disableSubmitBtn = false;
+    //     document.getElementById("dots").classList.remove("d-none");
+    //     toast.error("Api Server Error");
+    //   }
+    // });
   };
 
   const initialValues = {
@@ -191,6 +192,16 @@ const LoginForm = () => {
         {(formik) => {
           return (
             <Form noValidate>
+              {state && state.avatar && (
+                <input type="hidden" value={state.avatar} />
+              )}
+
+              {state && state.provider && (
+                <input type="hidden" value={state.provider} />
+              )}
+              {state && state.providerID && (
+                <input type="hidden" value={state.providerID} />
+              )}
               <div className="container">
                 <div className="row">
                   <div className="col-lg-6 col-md-12">
