@@ -122,8 +122,7 @@ const LoginForm = () => {
   let state = location.state;
 
   if (state)
-    toast(
-      "info",
+    toast.warn(
       "Facebook Account did not provide email address please fill the email id tp procced"
     );
 
