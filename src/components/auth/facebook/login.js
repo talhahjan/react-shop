@@ -11,6 +11,7 @@ const FacebookLogin = (props) => {
 
     FB.login(function (response) {
       if (response.authResponse) {
+        console.log("response", response);
         FB.api(`/me?fields=id,name,email,picture`, function (response) {
           let names = response.name.split(" ");
           let user = {
@@ -22,7 +23,6 @@ const FacebookLogin = (props) => {
             avatar: response.picture.data.url,
             jwt: response.accessToken,
           };
-          console.log("response", response.authResponse);
           if (response.email) return LoginBackend(user);
           else return navigate("/register", { state: user });
         });
