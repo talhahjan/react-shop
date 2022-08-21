@@ -197,14 +197,18 @@ const LoginForm = () => {
           return (
             <Form noValidate>
               {state && state.avatar && (
-                <input type="hidden" value={state.avatar} />
+                <input type="hidden" name="avatar" value={state.avatar} />
               )}
 
               {state && state.provider && (
-                <input type="hidden" value={state.provider} />
+                <input type="hidden" name="provider" value={state.provider} />
               )}
               {state && state.providerID && (
-                <input type="hidden" value={state.providerID} />
+                <input
+                  type="hidden"
+                  name="provider_id"
+                  value={state.providerID}
+                />
               )}
               <div className="container">
                 <div className="row">

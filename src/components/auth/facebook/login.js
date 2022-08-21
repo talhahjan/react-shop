@@ -22,7 +22,7 @@ const FacebookLogin = (props) => {
             avatar: response.picture.data.url,
             jwt: response.accessToken,
           };
-          console.log("response", response);
+          console.log("response", user);
           if (response.email) return LoginBackend(user);
           else return navigate("/register", { state: user });
         });
