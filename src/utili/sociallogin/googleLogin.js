@@ -7,6 +7,7 @@ const GoogleLogin = (props) => {
       client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
       callback: handleCallbackResponse,
       ux_mode: props.uxMode ? props.uxMode : "pop",
+      itp_support: true,
     });
 
     google.accounts.id.renderButton(document.getElementById("signInDiv"), {

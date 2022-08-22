@@ -1,11 +1,10 @@
 import jwt_decode from "jwt-decode";
-import { handleCallbackResponse } from "./lib";
 import axios from "axios";
 
 const refreshJwt = async () => {
   return await axios
     .get(`api/jwt/refresh`)
-    .then((res) => localStorage.setItem("token", res.data.authorisation.token))
+    .then((res) => localStorage.setItem("token", res.data.authorization.token))
     .catch((error) => console.log(`error refreshing jwt token`, error));
 };
 
