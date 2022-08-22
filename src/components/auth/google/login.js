@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 const GoogleLogin = (props) => {
+  const [loaded, setLoaded] = useState(false);
   const handleCallbackResponse = (response) => {
     const userObject = jwt_decode(response.credential);
 
@@ -40,8 +41,14 @@ const GoogleLogin = (props) => {
     script.src = "https://accounts.google.com/gsi/client"; // whatever url you want here
     script.async = true;
     script.defer = true;
+    script.addEventListener("load", () => setLoaded(true));
     document.head.appendChild(script);
 
+    return () => {};
+  }, []);
+
+  useEffect(() => {
+    if (!loaded) return;
     // global google
     google.accounts.id.initialize({
       client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
@@ -57,7 +64,7 @@ const GoogleLogin = (props) => {
       size: props.size ? props.size : "large",
       type: props.type ? props.type : "standard",
     });
-  }, []);
+  }, [loaded]);
 
   return <div id="signInDiv"></div>;
 };
