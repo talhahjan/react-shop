@@ -23,6 +23,14 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 const auth = useAuth(token);
 const userContext = createContext();
 
+if (!token) {
+  google.accounts.id.initialize({
+    client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    callback: handleCallbackResponse,
+  });
+  google.accounts.id.prompt();
+}
+
 root.render(
   <QueryClientProvider client={queryClient}>
     <React.StrictMode>
