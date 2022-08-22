@@ -54,10 +54,6 @@ const FacebookLogin = (props) => {
   };
 
   useEffect(() => {
-    const meta = document.createElement("meta");
-    meta.httpEquiv = "name";
-    meta.content = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-    document.getElementsByTagName("head")[0].appendChild(meta);
     window.fbAsyncInit = () => {
       window.FB.init({
         appId: process.env.REACT_APP_FACEBOOK_APP_ID,
