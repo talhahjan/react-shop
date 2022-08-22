@@ -2,14 +2,6 @@ import React, { useEffect, useState } from "react";
 import { handleCallbackResponse } from "../lib";
 const GoogleLogin = (props) => {
   useEffect(() => {
-    // global google
-    google.accounts.id.initialize({
-      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-      callback: handleCallbackResponse,
-      ux_mode: props.uxMode ? props.uxMode : "pop",
-      itp_support: true,
-    });
-
     google.accounts.id.renderButton(document.getElementById("signInDiv"), {
       theme: props.theme ? props.theme : "outline",
       logo_alignment: props.logo_alignment ? props.logo_alignment : "left",
