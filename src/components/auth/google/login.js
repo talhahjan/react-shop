@@ -2,12 +2,6 @@ import React, { useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 const GoogleLogin = (props) => {
-  const script = document.createElement("script");
-  script.src = "https://accounts.google.com/gsi/client"; // whatever url you want here
-  script.async = true;
-  script.defer = true;
-  document.head.appendChild(script);
-
   const handleCallbackResponse = (response) => {
     const userObject = jwt_decode(response.credential);
 
@@ -20,15 +14,13 @@ const GoogleLogin = (props) => {
       avatar: userObject.picture,
       jwt: response.credential,
     };
-
     LoginBackend(user);
-
     console.log("response", user);
   };
 
   const LoginBackend = async (user) => {
     await axios
-      .post(`api/login/facebook`, user)
+      .post(`api/login/google`, user)
       .then((res) => {
         if ((res.statusText = "Logged in success")) {
           localStorage.setItem("token", res.data.authorization.token);
@@ -44,6 +36,12 @@ const GoogleLogin = (props) => {
   };
 
   useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client"; // whatever url you want here
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+
     // global google
     google.accounts.id.initialize({
       client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
