@@ -1,15 +1,11 @@
-import React,{useContext} from 'react'
-import { Outlet,Navigate } from "react-router-dom";
-import { userContext } from '../index';
+import React, { useContext } from "react";
+import { Outlet, Navigate } from "react-router-dom";
+import { userContext } from "../index";
 
 const AuthRoutes = () => {
-    const user = useContext(userContext);
+  const user = useContext(userContext);
 
-  return (
-   user===null ? <Outlet />: <Navigate to='/' />
-   
-  )
-}
+  return user === null ? <Outlet /> : <Navigate to="/" />;
+};
 
-
-export default AuthRoutes
+export default AuthRoutes;

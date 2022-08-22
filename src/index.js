@@ -4,11 +4,10 @@ import "./assets/css/style.css";
 import React, { createContext } from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-
 import axios from "axios";
 import App from "./App";
 import useAuth from "../src/utili/useAuth";
+import { handleCallbackResponse } from "./utili/lib";
 
 const queryClient = new QueryClient();
 const token = localStorage.getItem("token");
@@ -23,6 +22,14 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const auth = useAuth(token);
 const userContext = createContext();
+
+if (!auth) {
+  google.accounts.id.initialize({
+    client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    callback: handleCallbackResponse,
+  });
+  google.accounts.id.prompt();
+}
 
 root.render(
   <QueryClientProvider client={queryClient}>
