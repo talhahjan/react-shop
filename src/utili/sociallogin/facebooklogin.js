@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import axios from "axios";
+import { LoginBackend } from "../lib";
 import { useNavigate } from "react-router-dom";
 const FacebookLogin = (props) => {
   const navigate = useNavigate();
@@ -31,23 +31,6 @@ const FacebookLogin = (props) => {
       }
     });
   }
-
-  const LoginBackend = async (user) => {
-    await axios
-      .post(`api/login/facebook`, user)
-      .then((res) => {
-        if ((res.statusText = "Logged in success")) {
-          localStorage.setItem("token", res.data.authorization.token);
-          console.log(res);
-          window.location = process.env.REACT_APP_HOME_PAGE;
-        } else {
-          console.log(res);
-        }
-      })
-      .catch((error) => {
-        throw new Error("error occurred while login user from back-end server");
-      });
-  };
 
   const onError = async (error) => {
     console.log(error);

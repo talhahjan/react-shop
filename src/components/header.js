@@ -10,7 +10,8 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import { userContext } from "../index";
 
-import FacebookLogin from "./auth/facebook/login";
+import FacebookLogin from "../utili/sociallogin/facebooklogin";
+import GoogleLogin from "../utili/sociallogin/googleLogin";
 
 const Header = () => {
   const user = useContext(userContext);
@@ -182,6 +183,8 @@ const Header = () => {
                               <FacebookLogin cssClass="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1">
                                 <FaFacebookF />
                               </FacebookLogin>
+
+                              <GoogleLogin type="icon" />
                             </div>
                             <br />
                             <p className="text-muted mb-2 text-left">

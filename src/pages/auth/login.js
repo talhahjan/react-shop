@@ -12,9 +12,9 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import spinner from "../../assets/images/spinner.gif";
-import FacebookLogin from "../../components/auth/facebook/login";
-import GoogleLogin from "../../components/auth/google/login";
-import InstagramLogin from "../../components/auth/instagram/login";
+import FacebookLogin from "../../utili/sociallogin/facebooklogin";
+import GoogleLogin from "../../utili/sociallogin/googleLogin";
+
 export default function Register() {
   useEffect(() => {
     document.querySelector("body").classList.remove("wrapper");
@@ -91,18 +91,8 @@ export default function Register() {
             <h5 className="text-center">Login With Social Account</h5>
           </div>
           <div className="card-body">
-            <div className="social-line text-center">
-              <FacebookLogin cssClass="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1">
-                <FaFacebookF />
-              </FacebookLogin>
-
-              <GoogleLogin cssClass="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1">
-                <FaGooglePlusG />
-              </GoogleLogin>
-
-              <InstagramLogin cssClass="btn-social btn-outline-instagram btn-social-circle waves-effect waves-light m-1">
-                <FaInstagramSquare />
-              </InstagramLogin>
+            <div className="d-flex justify-content-center flex-column">
+              <GoogleLogin type="standardS" cssClass="m-auto" size="large" />
             </div>
 
             <div className="d-flex justify-content-center text-center"></div>
