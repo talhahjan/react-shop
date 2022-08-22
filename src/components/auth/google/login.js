@@ -1,52 +1,32 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import axios from "axios";
 const GoogleLogin = (props) => {
-  const cssClass = props.cssClass ? props.cssClass : "";
-  const appID = props.appID
-    ? props.appID
-    : process.env.REACT_APP_GOOGLE_CLIENT_iD;
+  useEffect(() => {
+    const script = document.createElement("script");
 
-  const onSuccess = async (response) => {
-    console.log(response);
-    LoginInbackend(response);
-  };
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.defer = true;
 
-  const onError = async (error) => {
-    console.log(error);
-  };
+    document.body.appendChild(script);
 
-  const LoginInbackend = async (response) => {
-    let names = response.name.split(" ");
-    let user = {
-      provider: "facebook",
-      provider_id: response.id,
-
-      email: response.email,
-      first_name: names[0],
-      last_name: names[1],
-      avatar: response.picture.data.url,
-      jwt: response.accessToken,
+    return () => {
+      document.body.removeChild(script);
     };
+  }, []);
 
-    await axios
-      .post(`api/login/google`, user)
-      .then((res) => {
-        if ((res.statusText = "Logged in success")) {
-          localStorage.setItem("token", res.data.authorisation.token);
-          console.log(res);
-          window.location = process.env.REACT_APP_HOME_PAGE;
-        } else {
-          console.log(res);
-        }
-      })
-      .catch((error) => {
-        throw new Error("error occured while login user from back-end server");
-      });
-  };
-
-  useEffect(() => {}, []);
-
-  return <button className={cssClass}>{props.children}</button>;
+  return (
+    <>
+      <div
+        id="g_id_onload"
+        data-client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+        data-ux_mode="redirect"
+        data-login_uri="https://tjshop.vercel.app"
+      ></div>
+      <div className="g_id_signin" data-type="standard"></div>
+    </>
+  );
 };
 
 export default GoogleLogin;

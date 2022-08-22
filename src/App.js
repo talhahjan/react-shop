@@ -12,11 +12,12 @@ import Error from "./pages/error";
 import NotFound from "./pages/error/404";
 import ProtectedRoutes from "./components/protectedRoutes";
 import AuthRoutes from "./components/AuthRoutes";
-
+import GoogleLoginBtn from "./pages/test";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/test" element={<GoogleLoginBtn />} />
         <Route path="/" element={<AuthRoutes />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
