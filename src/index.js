@@ -6,8 +6,8 @@ import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import axios from "axios";
 import App from "./App";
-import useAuth from "../src/utili/useAuth";
-import { handleCallbackResponse } from "./utili/lib";
+import useAuth from "../src/utils/useAuth";
+import { handleCallbackResponse } from "./utils/lib";
 
 const queryClient = new QueryClient();
 const token = localStorage.getItem("token");
@@ -26,6 +26,7 @@ google.accounts.id.initialize({
   client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
   callback: handleCallbackResponse,
 });
+
 if (!token) {
   google.accounts.id.prompt();
 }

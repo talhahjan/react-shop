@@ -1,18 +1,16 @@
 import { useContext } from "react";
-import { FaBars, FaFacebookF } from "react-icons/fa";
+import { FaBars, FaFacebookF, FaGithub, FaGooglePlusG } from "react-icons/fa";
 import {
   MdSearch,
   MdLocalMall,
   MdFavorite,
   MdAccountCircle,
 } from "react-icons/md";
-
 import { useNavigate, Link } from "react-router-dom";
 import { userContext } from "../index";
+import { Facebook, Google, Github } from "../utils/firebase/social-media-login";
 
-import FacebookLogin from "../utili/sociallogin/facebooklogin";
-import GoogleLogin from "../utili/sociallogin/googleLogin";
-
+import { onSuccessLogin, onErrorLogin } from "../utils/lib";
 const Header = () => {
   const user = useContext(userContext);
 
@@ -180,11 +178,26 @@ const Header = () => {
                               </p>
                             </div>
                             <div className="social-line text-center">
-                              <FacebookLogin cssClass="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1">
-                                <FaFacebookF />
-                              </FacebookLogin>
+                              <Facebook
+                                cssClass="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1"
+                                btnText={<FaFacebookF />}
+                                onSuccess={onSuccessLogin}
+                                onError={onErrorLogin}
+                              />
 
-                              <GoogleLogin type="icon" />
+                              <Google
+                                cssClass="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"
+                                btnText={<FaGooglePlusG />}
+                                onSuccess={onSuccessLogin}
+                                onError={onErrorLogin}
+                              />
+
+                              <Github
+                                cssClass="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"
+                                btnText={<FaGithub />}
+                                onSuccess={onSuccessLogin}
+                                onError={onErrorLogin}
+                              />
                             </div>
                             <br />
                             <p className="text-muted mb-2 text-left">

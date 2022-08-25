@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import GoogleLogin from "../utili/sociallogin/googleLogin";
+import GoogleLoginBtn from "../utili/sociallogin/google-login-btn";
 
-const GoogleLoginBtn = () => {
-  return <GoogleLogin />;
+const GoogleLogin = () => {
+  return <GoogleLoginBtn />;
 };
 
-export default GoogleLoginBtn;
+export default GoogleLogin;
