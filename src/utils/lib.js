@@ -47,16 +47,16 @@ export const onSuccessLogin = (response) => {
   const jwt = response._tokenResponse.oauthAccessToken;
 
   const user = {
-    provider: response.user.providerData.providerId,
-    provider_id: response.user.providerData.uid,
-    email: response.email,
-    first_name: response._tokenResponse.displayName,
+    provider: response.providerId,
+    provider_id: response.user.providerData[0].uid,
+    email: response.user.email,
+    first_name: response._tokenResponse.firstName,
     last_name: response._tokenResponse.lastName,
     avatar: response._tokenResponse.photoUrl,
-    jwt: jwt,
+    jwt: response._tokenResponse.oauthAccessToken,
   };
   // oauthAccessToken;
-  console.log(user);
+  console.log("user", user);
   LoginBackend(user);
 };
 
