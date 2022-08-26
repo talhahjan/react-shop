@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-
+import { signOut } from "./lib";
 const refreshJwt = async () => {
   return await axios
     .get(`api/jwt/refresh`)
@@ -25,7 +25,7 @@ const useAuth = (token) => {
 
   if (user.exp * 1000 < Date.now()) {
     console.log(`jwt expired`);
-    localStorage.removeItem("token");
+    signOut();
     return null;
   }
 

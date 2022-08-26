@@ -1,6 +1,5 @@
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import firebase, { auth } from "./firebase/firebase-config";
 export const handleCallbackResponse = (response) => {
   const userObject = jwt_decode(response.credential);
 

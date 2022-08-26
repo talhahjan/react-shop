@@ -8,8 +8,7 @@ import {
 } from "react-icons/md";
 import { useNavigate, Link } from "react-router-dom";
 import { userContext } from "../index";
-import { Facebook, Google, Github } from "../utils/firebase/social-media-login";
-
+import FacebookLogin from "../utils/socialLogin/facebook";
 const Header = () => {
   const user = useContext(userContext);
 
@@ -177,19 +176,9 @@ const Header = () => {
                               </p>
                             </div>
                             <div className="social-line text-center">
-                              <Facebook
-                                cssClass="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1"
+                              <FacebookLogin
+                                cssClass="btn-social btn-outline-facebook waves-effect waves-light m-1"
                                 btnText={<FaFacebookF />}
-                              />
-
-                              <Google
-                                cssClass="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"
-                                btnText={<FaGooglePlusG />}
-                              />
-
-                              <Github
-                                cssClass="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"
-                                btnText={<FaGithub />}
                               />
                             </div>
                             <br />
