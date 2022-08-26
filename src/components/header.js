@@ -180,19 +180,16 @@ const Header = () => {
                               <Facebook
                                 cssClass="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1"
                                 btnText={<FaFacebookF />}
-                               
                               />
 
                               <Google
                                 cssClass="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"
                                 btnText={<FaGooglePlusG />}
-                               
                               />
 
                               <Github
                                 cssClass="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"
                                 btnText={<FaGithub />}
-                               }
                               />
                             </div>
                             <br />
