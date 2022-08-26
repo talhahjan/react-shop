@@ -4,7 +4,7 @@ export const handleCallbackResponse = (response) => {
   const userObject = jwt_decode(response.credential);
 
   const user = {
-    provider: "google",
+    provider: "google.com",
     provider_id: userObject.sub,
     email: userObject.email,
     first_name: userObject.given_name,
@@ -58,7 +58,7 @@ export const onSuccessLogin = (response) => {
   // oauthAccessToken;
   console.log("user", user);
   console.log("response", response);
-  // LoginBackend(user);
+  LoginBackend(user);
 };
 
 export const onErrorLogin = (error) => {
