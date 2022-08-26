@@ -38,7 +38,7 @@ const FacebookLogin = ({ cssClass, btnText }) => {
     FB.login(function (response) {
       if (response.authResponse) {
         console.log("Welcome!  Fetching your information.... ");
-        FB.api("/me?fields=email,profile", function (response) {
+        FB.api("/me", function (response) {
           console.log("Good to see you, " + response.name + ".");
         });
       } else {
