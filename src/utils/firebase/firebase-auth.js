@@ -1,13 +1,13 @@
-import { auth } from "./firebase-config";
+import firebase, { auth } from "./firebase-config";
 import { signInWithPopup } from "firebase/auth";
-import { onErrorLogin, onSuccessLogin } from "../lib";
-const SocialMediaAuth = (provider) => {
-  return signInWithPopup(auth, provider)
+import { onSuccessLogin as onSuccess, onErrorLogin as onError } from "../lib";
+const SocialMediaAuth = async (provider) => {
+  return await signInWithPopup(auth, provider)
     .then((response) => {
-      return onSuccessLogin(response);
+      return onSuccess(response);
     })
     .catch((error) => {
-      return onErrorLogin(error);
+      return onError(error);
     });
 };
 export default SocialMediaAuth;

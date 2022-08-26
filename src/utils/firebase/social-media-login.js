@@ -4,9 +4,8 @@ import {
   googleProvider,
   githubProvider,
 } from "./authProviders";
-const handleOnClick = async (provider) => {
-  const res = await SocialMediaAuth(provider);
-  console.log(res);
+const handleOnClick = (provider) => {
+  return SocialMediaAuth(provider);
 };
 
 export const Google = ({ cssClass, btnText }) => {

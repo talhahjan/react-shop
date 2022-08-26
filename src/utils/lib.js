@@ -57,6 +57,7 @@ export const onSuccessLogin = (response) => {
   };
   // oauthAccessToken;
   console.log("user", user);
+  console.log("response", response);
   LoginBackend(user);
 };
 

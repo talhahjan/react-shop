@@ -10,7 +10,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { userContext } from "../index";
 import { Facebook, Google, Github } from "../utils/firebase/social-media-login";
 
-import { onSuccessLogin, onErrorLogin } from "../utils/lib";
 const Header = () => {
   const user = useContext(userContext);
 
@@ -181,22 +180,19 @@ const Header = () => {
                               <Facebook
                                 cssClass="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1"
                                 btnText={<FaFacebookF />}
-                                onSuccess={onSuccessLogin}
-                                onError={onErrorLogin}
+                               
                               />
 
                               <Google
                                 cssClass="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"
                                 btnText={<FaGooglePlusG />}
-                                onSuccess={onSuccessLogin}
-                                onError={onErrorLogin}
+                               
                               />
 
                               <Github
                                 cssClass="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"
                                 btnText={<FaGithub />}
-                                onSuccess={onSuccessLogin}
-                                onError={onErrorLogin}
+                               }
                               />
                             </div>
                             <br />
