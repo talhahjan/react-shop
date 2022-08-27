@@ -41,19 +41,24 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
         console.log(response);
         if (response.authResponse) {
           const jwt = response.authResponse.accessToken;
+          const provider_id = response.authResponse.userID;
           FB.api(
             "/me?fields=id,name,email,picture,location,first_name,last_name,hometown",
             (response) => {
               const user = {
                 provider: "facebook.com",
-                provider_id: response.userID,
-                email: response.email,
+                provider_id: provider_id,
+                email: response.email ? response.email : null,
                 first_name: response.first_name,
                 last_name: response.last_name,
                 avatar: response.picture.data.url,
                 jwt: jwt,
-                location: response.location ? response.location : null,
-                homeTown: response.hometown ? response.hometown : null,
+                location: response.location.name
+                  ? response.location.name
+                  : null,
+                homeTown: response.hometown.name
+                  ? response.hometown.name
+                  : null,
               };
               onSuccessLogin(user);
             }
@@ -64,6 +69,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
       },
       {
         scope: "public_profile,email,user_location,user_hometown",
+        auth_type: "rerequest",
       }
     );
   };
