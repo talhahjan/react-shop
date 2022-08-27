@@ -37,17 +37,21 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
   const SignIn = () => {
     FB.login(
       function (response) {
+        console.log(response);
         if (response.authResponse) {
           console.log("Welcome!  Fetching your information.... ");
-          FB.api("/me?fileds=email", function (response) {
-            console.log(response);
-          });
+          FB.api(
+            "/me?fileds=email,id,first_name,last_name,picture",
+            function (response) {
+              console.log(response);
+            }
+          );
         } else {
           console.log("User cancelled login or did not fully authorize.");
         }
       },
       {
-        scope: "public_profile,email",
+        scope: "public_profile,email,user_likes",
       }
     );
   };
