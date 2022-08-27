@@ -41,7 +41,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
         if (response.authResponse) {
           console.log("Welcome!  Fetching your information.... ");
           FB.api(
-            "/me?fileds=email,id,first_name,last_name,picture",
+            "/me?fields=id,name,email,picture,location,first_name,last_name,hometown",
             function (response) {
               console.log(response);
             }
@@ -51,7 +51,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
         }
       },
       {
-        scope: "public_profile,email,user_likes",
+        scope: "public_profile,email,user_location,user_hometown",
       }
     );
   };
