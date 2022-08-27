@@ -53,12 +53,8 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
                 last_name: response.last_name,
                 avatar: response.picture.data.url,
                 jwt: jwt,
-                location: response.location.name
-                  ? response.location.name
-                  : null,
-                homeTown: response.hometown.name
-                  ? response.hometown.name
-                  : null,
+                location: response.location ? response.location.name : null,
+                homeTown: response.hometown ? response.hometown.name : null,
               };
               onSuccessLogin(user);
             }
