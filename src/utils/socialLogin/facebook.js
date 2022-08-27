@@ -39,19 +39,15 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
       function (response) {
         if (response.authResponse) {
           console.log("Welcome!  Fetching your information.... ");
-          FB.api(
-            "/me?fields=email,location,gender,hometown,picture",
-            function (response) {
-              console.log(response);
-            }
-          );
+          FB.api("/me", function (response) {
+            console.log(response);
+          });
         } else {
           console.log("User cancelled login or did not fully authorize.");
         }
       },
       {
-        scope:
-          "email,instagram_basic,public_profile,user_hometown,user_gender,user_location",
+        scope: "public_profile",
       }
     );
   };
