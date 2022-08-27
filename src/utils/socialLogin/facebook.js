@@ -39,7 +39,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
       function (response) {
         if (response.authResponse) {
           console.log("Welcome!  Fetching your information.... ");
-          FB.api("/me", function (response) {
+          FB.api("/me?fileds=email", function (response) {
             console.log(response);
           });
         } else {
@@ -47,7 +47,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
         }
       },
       {
-        scope: "public_profile",
+        scope: "public_profile,email",
       }
     );
   };
