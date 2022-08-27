@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaFacebookF } from "react-icons/fa";
+import { onErrorLogin, onSuccessLogin } from "../lib";
 const FacebookLogin = ({ cssClass, btnText, icon }) => {
   const [jsLoaded, setJsLoaded] = useState(false);
 
@@ -40,10 +41,25 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
         console.log(response);
         if (response.authResponse) {
           console.log("Welcome!  Fetching your information.... ");
+          const jwt = response.authResponse.accessToken;
+          const provider_id = authResponse.UserID;
+          const provider = "facebook.com";
           FB.api(
             "/me?fields=id,name,email,picture,location,first_name,last_name,hometown",
-            function (response) {
-              console.log(response);
+            (response) => {
+              const user = {
+                provider: provider,
+                provider_id: provider_id,
+                email: response.email,
+                first_name: response.first_name,
+                last_name: response.last_name,
+                avatar: response.picture.data.url,
+                jwt: jwt,
+                location: response.location ? response.location : null,
+                homeTown: response.hometown ? response.hometown : null,
+              };
+
+              onSuccessLogin(user);
             }
           );
         } else {

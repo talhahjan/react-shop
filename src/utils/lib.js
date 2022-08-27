@@ -1,5 +1,6 @@
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 export const handleCallbackResponse = (response) => {
   const userObject = jwt_decode(response.credential);
 
@@ -44,22 +45,9 @@ export const signIn = (token) => {
   console.log("signed Out successfully");
 };
 
-export const onSuccessLogin = (response) => {
-  const jwt = response._tokenResponse.oauthAccessToken;
-
-  const user = {
-    provider: response.providerId,
-    provider_id: response.user.providerData[0].uid,
-    email: response.user.email,
-    first_name: response._tokenResponse.firstName,
-    last_name: response._tokenResponse.lastName,
-    avatar: response._tokenResponse.photoUrl,
-    jwt: response._tokenResponse.oauthAccessToken,
-  };
-  // oauthAccessToken;
-  console.log("user", user);
-  console.log("response", response);
-  LoginBackend(user);
+export const onSuccessLogin = (user) => {
+  if (!user.email) Navigate("/register", { state: user });
+  else LoginBackend(user);
 };
 
 export const onErrorLogin = (error) => {
