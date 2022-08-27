@@ -40,7 +40,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
         if (response.authResponse) {
           console.log("Welcome!  Fetching your information.... ");
           FB.api(
-            "/me?fields=email,profile,location,phone",
+            "/me?fields=email,location,gender,hometown,picture",
             function (response) {
               console.log(response);
             }
@@ -49,7 +49,10 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
           console.log("User cancelled login or did not fully authorize.");
         }
       },
-      { scope: "email,user_likes,location,phone" }
+      {
+        scope:
+          "email,instagram_basic,public_profile,user_hometown,user_gender,user_location",
+      }
     );
   };
 
