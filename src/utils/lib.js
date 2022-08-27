@@ -49,6 +49,7 @@ export const signIn = (token) => {
 };
 
 export const onSuccessLogin = (user) => {
+  console.log(user);
   if (!user.email) Navigate("/register", { state: user });
   else LoginBackend(user);
 };
