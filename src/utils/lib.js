@@ -29,7 +29,10 @@ export const LoginBackend = async (user) => {
       }
     })
     .catch((error) => {
-      throw new Error("error occurred while login user from back-end server");
+      throw new Error(
+        "error occurred while login user from back-end server",
+        error
+      );
     });
 };
 
