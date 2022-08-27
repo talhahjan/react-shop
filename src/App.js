@@ -4,7 +4,7 @@ import Home from "./pages/home";
 import Section from "./pages/collection/section";
 import Category from "./pages/collection/category";
 import Product from "./pages/collection/product";
-// import Login from "./pages/auth/login";
+import Login from "./pages/auth/login";
 import Logout from "./pages/auth/logout";
 import Register from "./pages/auth/register";
 import Profile from "./pages/user/profile";
@@ -19,7 +19,7 @@ function App() {
       <Routes>
         {/* <Route path="/test" element={<GoogleLoginBtn />} /> */}
         <Route path="/" element={<AuthRoutes />}>
-          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
         <Route path="/" element={<Layout />}>

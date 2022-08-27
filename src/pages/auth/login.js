@@ -1,9 +1,9 @@
 import {
   FaFacebookF,
-  FaGooglePlusG,
+  FaGoogle,
   FaEyeSlash,
+  FaGithub,
   FaEye,
-  FaInstagramSquare,
 } from "react-icons/fa";
 import { MdFingerprint, MdEmail, MdPersonAdd } from "react-icons/md";
 import { useState, useEffect } from "react";
@@ -12,9 +12,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import spinner from "../../assets/images/spinner.gif";
-import FacebookLogin from "../../utili/sociallogin/facebooklogin";
-import GoogleLogin from "../../utili/sociallogin/googleLogin";
-
+import FacebookLogin from "../../utils/socialLogin/facebook";
 export default function Register() {
   useEffect(() => {
     document.querySelector("body").classList.remove("wrapper");
@@ -91,8 +89,24 @@ export default function Register() {
             <h5 className="text-center">Login With Social Account</h5>
           </div>
           <div className="card-body">
-            <div className="d-flex justify-content-center flex-column">
-              <GoogleLogin type="standardS" cssClass="m-auto" size="large" />
+            <div className="text-center">
+              <FacebookLogin
+                cssClass="btn-social large btn-outline-facebook waves-effect waves-light m-1"
+                btnText="Login With facebook"
+                icon={<FaFacebookF />}
+              />
+
+              <FacebookLogin
+                cssClass="btn-social large btn-outline-github waves-effect waves-light m-1"
+                btnText="Login With Github"
+                icon={<FaGithub />}
+              />
+
+              <FacebookLogin
+                cssClass="btn-social large btn-outline-google waves-effect waves-light m-1"
+                btnText="Login With Google"
+                icon={<FaGoogle />}
+              />
             </div>
 
             <div className="d-flex justify-content-center text-center"></div>

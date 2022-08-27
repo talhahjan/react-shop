@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FaBars, FaFacebookF, FaGithub, FaGooglePlusG } from "react-icons/fa";
+import { FaBars, FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import {
   MdSearch,
   MdLocalMall,
@@ -177,8 +177,21 @@ const Header = () => {
                             </div>
                             <div className="social-line text-center">
                               <FacebookLogin
-                                cssClass="btn-social btn-outline-facebook waves-effect waves-light m-1"
-                                btnText={<FaFacebookF />}
+                                cssClass="btn-social small btn-outline-facebook waves-effect waves-light m-1"
+                                btnText="Login With facebook"
+                                icon={<FaFacebookF />}
+                              />
+
+                              <FacebookLogin
+                                cssClass="btn-social small btn-outline-github waves-effect waves-light m-1"
+                                btnText="Login With Github"
+                                icon={<FaGithub />}
+                              />
+
+                              <FacebookLogin
+                                cssClass="btn-social small btn-outline-google waves-effect waves-light m-1"
+                                btnText="Login With Google"
+                                icon={<FaGoogle />}
                               />
                             </div>
                             <br />
