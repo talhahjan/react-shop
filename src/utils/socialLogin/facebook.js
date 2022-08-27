@@ -40,16 +40,13 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
       function (response) {
         console.log(response);
         if (response.authResponse) {
-          console.log("Welcome!  Fetching your information.... ");
           const jwt = response.authResponse.accessToken;
-          const provider_id = authResponse.UserID;
-          const provider = "facebook.com";
           FB.api(
             "/me?fields=id,name,email,picture,location,first_name,last_name,hometown",
             (response) => {
               const user = {
-                provider: provider,
-                provider_id: provider_id,
+                provider: "facebook.com",
+                provider_id: response.userID,
                 email: response.email,
                 first_name: response.first_name,
                 last_name: response.last_name,
