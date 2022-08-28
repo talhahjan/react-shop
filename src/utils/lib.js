@@ -52,11 +52,10 @@ export const signIn = (token) => {
 };
 
 export const onSuccessLogin = (user) => {
-  const navigate=useNavigate();
+
   console.log(user);
   if (!user.email){
-  navigate('/register')}
-  
+window.location ='/register;  
   else {
    LoginBackend(user);
   }
