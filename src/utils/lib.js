@@ -55,7 +55,7 @@ export const onSuccessLogin = (user) => {
 
   console.log(user);
   if (!user.email){
-window.location ='/register;  
+window.location ='/register';  
   else {
    LoginBackend(user);
   }
