@@ -43,7 +43,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
           const jwt = response.authResponse.accessToken;
           const provider_id = response.authResponse.userID;
           FB.api(
-            "/me?fields=id,name,email,picturefirst_name,last_name",
+            "/me?fields=id,name,email,picture,first_name,last_name",
             (response) => {
   //            const user = {
 //                provider: "facebook.com",
