@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { onErrorLogin, onSuccessLogin } from "../lib";
+import { useNavigate } from "react-router-dom";
+
 const FacebookLogin = ({ cssClass, btnText, icon }) => {
   const [jsLoaded, setJsLoaded] = useState(false);
 
@@ -36,6 +38,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
   }, []);
 
   const SignIn = () => {
+      const navigate = useNavigate();
     FB.login(
       function (response) {
         console.log(response);
@@ -45,6 +48,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
           FB.api(
             "/me?fields=id,name,email,picture,first_name,last_name",
             (response) => {
+             if(response.email) {
              const user = {
                provider: "facebook.com",
                provider_id: provider_id,
@@ -59,6 +63,15 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
              console.log(user)
               console.log(response)
              // onSuccessLogin(user);
+             }
+              else
+              {
+                  navigate(`/register`, {
+                   state: {
+                          user,
+                           },
+                         });
+              }
             }
           );
         } else {
