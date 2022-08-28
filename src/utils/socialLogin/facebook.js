@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { onErrorLogin, onSuccessLogin } from "../lib";
-import { useNavigate } from "react-router-dom";
-
 const FacebookLogin = ({ cssClass, btnText, icon }) => {
   const [jsLoaded, setJsLoaded] = useState(false);
 
@@ -38,7 +36,6 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
   }, []);
 
   const SignIn = () => {
-      const navigate = useNavigate();
     FB.login(
       function (response) {
         console.log(response);
@@ -46,33 +43,29 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
           const jwt = response.authResponse.accessToken;
           const provider_id = response.authResponse.userID;
           FB.api(
-            "/me?fields=id,name,email,picture,first_name,last_name",
+            "/me?fields=id,name,email,picture,location,first_name,last_name,hometown",
             (response) => {
-             if(response.email) {
-             const user = {
-               provider: "facebook.com",
-               provider_id: provider_id,
-               email: response.email ? response.email : null,
-               first_name: response.first_name,
-               last_name: response.last_name,
-               avatar: response.picture.data.url,
-               jwt: jwt,
-               location: response.location ? response.location.name : null,
-               homeTown: response.hometown ? response.hometown.name : null,
+              const user = {
+                provider: "facebook.com",
+                provider_id: provider_id,
+                email: response.email ? response.email : null,
+                first_name: response.first_name,
+                last_name: response.last_name,
+                avatar: response.picture.data.url,
+                jwt: jwt,
+                 location: response.location ? response.location.name : null,
+                 homeTown: response.hometown ? response.hometown.name : null,
               };
-             console.log(user)
-              console.log(response)
-             // onSuccessLogin(user);
-             }
-              else
-              {
-                  navigate(`/register`);}
+
+              onSuccessLogin(user);
+            }
+          );
         } else {
           console.log("User cancelled login or did not fully authorize.");
         }
       },
       {
-        scope: "public_profile,email",
+        scope: "public_profile,email,user_location,user_hometown",
         auth_type: "rerequest",
       }
     );
