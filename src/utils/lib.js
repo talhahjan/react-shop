@@ -21,7 +21,7 @@ const socialSignOut = (provider) => {
   switch (provider) {
     case "google.com":
       console.log("google logout performed");
-      google.accounts.id.disableAutoSelect();
+//      google.accounts.id.disableAutoSelect();
     case "facebook.com":
       FB.logout((response) => {
         console.log("facebook logout", response);
