@@ -23,9 +23,9 @@ const socialSignOut = (provider) => {
       console.log("google logout performed");
 //      google.accounts.id.disableAutoSelect();
     case "facebook.com":
-      FB.logout((response) => {
-        console.log("facebook logout", response);
-      });
+//      FB.logout((response) => {
+  //      console.log("facebook logout", response);
+    //  });
     case "twitter.com":
   }
 };
