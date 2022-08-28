@@ -191,7 +191,7 @@ const Header = () => {
 
                               <GoogleLogin
                                 cssClass="d-inline-block m-1"
-                                size="small"
+                                size="large"
                                 width="180px"
                                 height="35px"
                               />
