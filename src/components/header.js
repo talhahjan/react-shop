@@ -9,6 +9,7 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import { userContext } from "../index";
 import FacebookLogin from "../utils/socialLogin/facebook";
+import { GoogleLogin } from "../utils/socialLogin/google";
 const Header = () => {
   const user = useContext(userContext);
 
@@ -188,10 +189,9 @@ const Header = () => {
                                 icon={<FaGithub />}
                               />
 
-                              <FacebookLogin
+                              <GoogleLogin
                                 cssClass="btn-social small btn-outline-google waves-effect waves-light m-1"
-                                btnText="Login With Google"
-                                icon={<FaGoogle />}
+                                size="large"
                               />
                             </div>
                             <br />

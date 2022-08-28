@@ -3,7 +3,7 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 export const handleCallbackResponse = (response) => {
   const userObject = jwt_decode(response.credential);
-
+  console.log("user object", userObject);
   const user = {
     provider: "google.com",
     provider_id: userObject.sub,
@@ -13,6 +13,7 @@ export const handleCallbackResponse = (response) => {
     avatar: userObject.picture,
     jwt: response.credential,
   };
+  console.log("user ", user);
   LoginBackend(user);
 };
 
