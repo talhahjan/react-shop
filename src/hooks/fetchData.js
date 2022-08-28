@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-// this hooks will get sections and its categpories linked to those  section
+// this hooks will get sections and its categories linked to those  section
 export const useSections = () => {
   return useQuery(
     "sections",
@@ -18,7 +18,7 @@ export const useSections = () => {
       }),
     {
       cacheTime: 50000,
-      // redirect user to 520 error page if any error occured
+      // redirect user to 520 error page if any error occurred
     }
   );
 };
@@ -49,10 +49,13 @@ export const useFeaturedProduct = () => {
 export const usePopularBrands = () => {
   return useQuery(
     "brands-popluar",
-    () => axios.get(`api/brands/popular`).catch((error) => {throw new Error(error);}),
+    () =>
+      axios.get(`api/brands/popular`).catch((error) => {
+        throw new Error(error);
+      }),
     {
       cacheTime: 50000,
-      // redirect user to 520 error page if any error occured
+      // redirect user to 520 error page if any error occurred
     }
   );
 };
@@ -66,7 +69,7 @@ export const useProduct = (slug) => {
   });
 };
 
-// this hooks will collects all the products in particulat sections
+// this hooks will collects all the products in particular sections
 export const useSection = (slug) => {
   return useInfiniteQuery(
     ["section", slug],
@@ -74,7 +77,7 @@ export const useSection = (slug) => {
 
     {
       getNextPageParam: (pages) => {
-        // let us to deconstuct last page and current page pages.data variable
+        // let us to destructure last page and current page pages.data variable
         let { current_page, last_page } = pages.data;
         if (current_page < last_page) return current_page + 1;
         else return undefined;
@@ -83,14 +86,14 @@ export const useSection = (slug) => {
   );
 };
 
-// this hooks will collects all the products in particulat category
+// this hooks will collects all the products in particular category
 export const useCategory = (slug) => {
   return useInfiniteQuery(
     ["category", slug],
     ({ pageParam = 1 }) => axios.get(`api/category/${slug}?page=${pageParam}`),
     {
       getNextPageParam: (pages) => {
-        // let us to deconstuct last page and current page pages.data variable
+        // let us to destructure last page and current page pages.data variable
         let { current_page, last_page } = pages.data;
         if (current_page < last_page) return current_page + 1;
         else return undefined;
@@ -103,7 +106,7 @@ export const useProfile = () => {
   const navigate = useNavigate();
   return useQuery("user-profile", () => {
     return axios
-      .get(`api/user/profile`)
+      .get(`api/user/pofile`)
       .catch((error) => {
         const { status, statusText } = error.response;
         const { message, code } = error;
@@ -124,9 +127,9 @@ export const useProfile = () => {
 };
 
 const UpdateProfile = async (values) => {
-      return await axios.post(`api/user/profile/edit`, values).catch((error) => {
-        throw new Error(error);
-    });
+  return await axios.post(`api/user/profile/edit`, values).catch((error) => {
+    throw new Error(error);
+  });
 };
 
 export const useUpdateProfile = () => {
@@ -164,13 +167,18 @@ export const useUpdateProfile = () => {
 };
 // export const useUpdateProfile=useMutation()
 
-
 export const useFilter = () => {
   return useQuery(
     "filter",
-    () => axios.get(`api/filter`).catch((error) => {throw new Error(error);}).then((response)=>{
-      return response.data;
-    }),
+    () =>
+      axios
+        .get(`api/filter`)
+        .catch((error) => {
+          throw new Error(error);
+        })
+        .then((response) => {
+          return response.data;
+        }),
     {
       cacheTime: 50000,
       // enabled: false,
@@ -178,7 +186,3 @@ export const useFilter = () => {
     }
   );
 };
-
-
-
-
