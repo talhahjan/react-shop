@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export const handleCallbackResponse = (response) => {
   const userObject = jwt_decode(response.credential);
@@ -55,7 +55,8 @@ export const onSuccessLogin = (user) => {
 
   console.log(user);
   if (!user.email){
-window.location ='/register'; 
+Navigate('/register',{state:{id:1,name:'sabaoon'}});
+
   }
   else {
    LoginBackend(user);
