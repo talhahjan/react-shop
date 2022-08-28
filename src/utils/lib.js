@@ -17,6 +17,19 @@ export const handleCallbackResponse = (response) => {
   LoginBackend(user);
 };
 
+const socialSignOut = (provider) => {
+  switch (provider) {
+    case "google.com":
+      console.log("google logout performed");
+      google.accounts.id.disableAutoSelect();
+    case "facebook.com":
+      FB.logout((response) => {
+        console.log("facebook logout", response);
+      });
+    case "twitter.com":
+  }
+};
+
 export const LoginBackend = async (user) => {
   await axios
     .post(`api/login/${user.provider}`, user)
@@ -51,6 +64,7 @@ export const signIn = (token) => {
 
 export const onSuccessLogin = (user) => {
   console.log(user);
+  socialSignOut(user.provider);
   if (!user.email) Navigate("/register", { state: user });
   else LoginBackend(user);
 };
