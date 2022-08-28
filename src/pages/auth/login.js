@@ -13,6 +13,7 @@ import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import spinner from "../../assets/images/spinner.gif";
 import FacebookLogin from "../../utils/socialLogin/facebook";
+import GoogleLogin from "../../utils/socialLogin/google";
 export default function Register() {
   useEffect(() => {
     document.querySelector("body").classList.remove("wrapper");
@@ -90,10 +91,9 @@ export default function Register() {
           </div>
           <div className="card-body">
             <div className="text-center">
-              <FacebookLogin
-                cssClass="btn-social large btn-outline-facebook waves-effect waves-light m-1"
-                btnText="Login With facebook"
-                icon={<FaFacebookF />}
+              <GoogleLogin
+                size="large"
+                cssClass="d-inline-block btn-social large m-2"
               />
 
               <FacebookLogin

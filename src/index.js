@@ -8,27 +8,27 @@ import axios from "axios";
 import App from "./App";
 import useAuth from "../src/utils/useAuth";
 import { handleCallbackResponse } from "./utils/lib";
-
 const queryClient = new QueryClient();
 const token = localStorage.getItem("token");
-
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common["Conent-Type"] = "application/json";
 axios.defaults.headers.common["Accept"] = "application/json";
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
 const auth = useAuth(token);
 const userContext = createContext();
-google.accounts.id.initialize({
-  client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-  callback: handleCallbackResponse,
-});
 
-if (!token) {
-  google.accounts.id.prompt();
+if (google) {
+  google.accounts.id.initialize({
+    client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    callback: handleCallbackResponse,
+    // context: "use",
+  });
+
+  if (!token) {
+    google.accounts.id.prompt();
+  }
 }
 
 root.render(

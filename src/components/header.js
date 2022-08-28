@@ -9,7 +9,7 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import { userContext } from "../index";
 import FacebookLogin from "../utils/socialLogin/facebook";
-import { GoogleLogin } from "../utils/socialLogin/google";
+import GoogleLogin from "../utils/socialLogin/google";
 const Header = () => {
   const user = useContext(userContext);
 

@@ -1,4 +1,10 @@
-import { FaEyeSlash, FaEye } from "react-icons/fa";
+import {
+  FaEyeSlash,
+  FaEye,
+  FaGithub,
+  FaGoogle,
+  FaFacebookF,
+} from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import { MdFingerprint, MdEmail, MdPersonAdd, MdFace } from "react-icons/md";
 import { useState, useEffect } from "react";
@@ -7,7 +13,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
+import GoogleLogin from "../../utils/socialLogin/google";
+import FacebookLogin from "../../utils/socialLogin/facebook";
 export default function Login() {
   useEffect(() => {
     document.querySelector("body").classList.remove("wrapper");
@@ -84,7 +91,24 @@ export default function Login() {
             <h5 className="text-center">Login With Social Account</h5>
           </div>
           <div className="card-body">
-            <div className="social-line text-center"></div>
+            <div className="social-line text-center">
+              <GoogleLogin
+                size="large"
+                cssClass="d-inline-block btn-social large m-2"
+              />
+
+              <FacebookLogin
+                cssClass="btn-social large btn-outline-facebook waves-effect waves-light m-1"
+                btnText="Login With Facebook"
+                icon={<FaFacebookF />}
+              />
+
+              <FacebookLogin
+                cssClass="btn-social large btn-outline-github waves-effect waves-light m-1"
+                btnText="Login With Github"
+                icon={<FaGithub />}
+              />
+            </div>
             <p className="text-muted text-center my-2">Or Be Classical</p>
 
             <LoginForm />
@@ -174,12 +198,12 @@ const LoginForm = () => {
   };
 
   const initialValues = {
-    first_name: state.first_name ? state.first_name : "",
-    last_name: state.last_name ? state.last_name : "",
-    email: state.email ? state.email : "",
-    avatar: state.avatar ? state.avatar : "",
-    provider: state.provider ? state.provider : "",
-    providerID: state.providerID ? state.providerID : "",
+    first_name: state ? state.first_name : "",
+    last_name: state ? state.last_name : "",
+    email: "",
+    avatar: state ? state.avatar : "",
+    provider: state ? state.provider : "",
+    providerID: state ? state.providerID : "",
     password: "",
     password_confirmation: "",
   };
