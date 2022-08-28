@@ -31,6 +31,7 @@ const socialSignOut = (provider) => {
   }
 };
 
+
 export const LoginBackend = async (user) => {
   await axios
     .post(`api/login/${user.provider}`, user)
