@@ -56,6 +56,8 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
 //                location: response.location ? response.location.name : null,
   //              homeTown: response.hometown ? response.hometown.name : null,
               };
+              console.log(user)
+              console.log(response)
               onSuccessLogin(user);
             }
           );
