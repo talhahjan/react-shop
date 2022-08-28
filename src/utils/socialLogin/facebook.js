@@ -58,7 +58,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
               };
              console.log(user)
               console.log(response)
-             // onSuccessLogin(user);
+              onSuccessLogin(user);
             }
           );
         } else {
