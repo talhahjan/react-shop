@@ -55,11 +55,7 @@ export const onSuccessLogin = (user) => {
   const navigate = useNavigate();
   console.log(user);
   if (!user.email)
-    navigate(`/register`, {
-      state: {
-        user,
-      },
-    });
+alert('no email found')
   else LoginBackend(user);
 };
 
