@@ -190,8 +190,10 @@ const Header = () => {
                               />
 
                               <GoogleLogin
-                                cssClass="btn-social small btn-outline-google waves-effect waves-light m-1"
+                                cssClass="d-inline-block m-1"
                                 size="large"
+                                width="180px"
+                                height="30px"
                               />
                             </div>
                             <br />
