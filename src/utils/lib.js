@@ -17,18 +17,6 @@ export const handleCallbackResponse = (response) => {
   LoginBackend(user);
 };
 
-const socialSignOut = (provider) => {
-  switch (provider) {
-    case "google.com":
-      console.log("google logout performed");
-//      google.accounts.id.disableAutoSelect();
-    case "facebook.com":
-//      FB.logout((response) => {
-  //      console.log("facebook logout", response);
-    //  });
-    case "twitter.com":
-  }
-};
 
 export const LoginBackend = async (user) => {
   await axios
@@ -51,7 +39,6 @@ export const LoginBackend = async (user) => {
 };
 
 export const signOut = () => {
-  firebase.auth().signOut();
   localStorage.removeItem("token");
   console.log("signed In successfully");
 };
@@ -64,7 +51,7 @@ export const signIn = (token) => {
 
 export const onSuccessLogin = (user) => {
   console.log(user);
-  socialSignOut(user.provider);
+  if(!user.email) console.log(user.email);
   if (!user.email) Navigate("/register", { state: user });
   else LoginBackend(user);
 };
