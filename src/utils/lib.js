@@ -18,18 +18,6 @@ export const handleCallbackResponse = (response) => {
   LoginBackend(user);
 };
 
-const socialSignOut = (provider) => {
-  switch (provider) {
-    case "google.com":
-      console.log("google logout performed");
-      google.accounts.id.disableAutoSelect();
-    case "facebook.com":
-      FB.logout((response) => {
-        console.log("facebook logout", response);
-      });
-    case "twitter.com":
-  }
-};
 
 
 export const LoginBackend = async (user) => {
@@ -66,7 +54,6 @@ export const signIn = (token) => {
 export const onSuccessLogin = (user) => {
   const navigate = useNavigate();
   console.log(user);
-  socialSignOut(user.provider);
   if (!user.email)
     navigate(`/register`, {
       state: {
