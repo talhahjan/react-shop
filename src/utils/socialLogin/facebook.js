@@ -45,17 +45,17 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
           FB.api(
             "/me?fields=id,name,email,picturefirst_name,last_name",
             (response) => {
-              const user = {
-                provider: "facebook.com",
-                provider_id: provider_id,
-                email: response.email ? response.email : null,
-                first_name: response.first_name,
-                last_name: response.last_name,
-                avatar: response.picture.data.url,
-                jwt: jwt,
+  //            const user = {
+//                provider: "facebook.com",
+  //              provider_id: provider_id,
+    //            email: response.email ? response.email : null,
+      //          first_name: response.first_name,
+        //        last_name: response.last_name,
+          //      avatar: response.picture.data.url,
+            //    jwt: jwt,
 //                location: response.location ? response.location.name : null,
   //              homeTown: response.hometown ? response.hometown.name : null,
-              };
+              //};
               console.log(user)
               console.log(response)
               onSuccessLogin(user);
