@@ -43,7 +43,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
           const jwt = response.authResponse.accessToken;
           const provider_id = response.authResponse.userID;
           FB.api(
-            "/me?fields=id,name,email,picture,location,first_name,last_name,hometown",
+            "/me?fields=id,name,email,picturefirst_name,last_name",
             (response) => {
               const user = {
                 provider: "facebook.com",
@@ -53,8 +53,8 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
                 last_name: response.last_name,
                 avatar: response.picture.data.url,
                 jwt: jwt,
-                location: response.location ? response.location.name : null,
-                homeTown: response.hometown ? response.hometown.name : null,
+//                location: response.location ? response.location.name : null,
+  //              homeTown: response.hometown ? response.hometown.name : null,
               };
               onSuccessLogin(user);
             }
@@ -64,7 +64,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
         }
       },
       {
-        scope: "public_profile,email,user_location,user_hometown",
+        scope: "public_profile,email",
         auth_type: "rerequest",
       }
     );
