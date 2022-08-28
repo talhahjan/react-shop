@@ -51,7 +51,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
                email: response.email ? response.email : null,
                first_name: response.first_name,
                last_name: response.last_name,
-               avatar: responsepicture.data.url,
+               avatar: response.picture.data.url,
                jwt: jwt,
                location: response.location ? response.location.name : null,
                homeTown: response.hometown ? response.hometown.name : null,
