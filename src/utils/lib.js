@@ -54,10 +54,12 @@ export const signIn = (token) => {
 export const onSuccessLogin = (user) => {
   const navigate=useNavigate();
   console.log(user);
-  if (!user.email)
-  navigate('/register')
-  else 
+  if (!user.email){
+  navigate('/register')}
+  
+  else {
    LoginBackend(user);
+  }
 };
 
 export const onErrorLogin = (error) => {
