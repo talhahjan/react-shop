@@ -66,14 +66,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
              }
               else
               {
-                  navigate(`/register`, {
-                   state: {
-                          user,
-                           },
-                         });
-              }
-            }
-          );
+                  navigate(`/register`);
         } else {
           console.log("User cancelled login or did not fully authorize.");
         }
