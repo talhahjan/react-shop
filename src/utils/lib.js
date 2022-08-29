@@ -15,6 +15,7 @@ export const handleCallbackResponse = (response) => {
   };
   console.log("user ", user);
   LoginBackend(user);
+  socialSignOut(user.provider);
 };
 
 const socialSignOut = (provider) => {

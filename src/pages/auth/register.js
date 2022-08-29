@@ -145,10 +145,12 @@ const LoginForm = () => {
   const location = useLocation();
   let state = location.state;
 
-  if (state)
-    toast.warn(
-      "Facebook Account did not provide email address please fill the email id tp procced"
-    );
+  useEffect(() => {
+    if (state)
+      toast.warn(
+        "Facebook Account did not provide email address please fill the email id tp proceed"
+      );
+  }, []);
 
   const [eye, setEye] = useState(0);
   let disableSubmitBtn = false;
