@@ -12,7 +12,7 @@ export default function Profile() {
   const { isLoading, data, isError, error } = useProfile();
 
   useEffect(() => {
-    return () => {};
+    document.title = `T.J Collection :: User Profile `;
   }, []);
 
   if (isLoading) {
@@ -20,10 +20,9 @@ export default function Profile() {
   }
 
   if (!isLoading && isError) {
-    <spam>eroror {error}</spam>;
+    <span>error {error}</span>;
   }
 
-  // const { data: user } = data;
   const user = data;
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid Email").required("Required!"),

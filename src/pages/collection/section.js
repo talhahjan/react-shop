@@ -1,11 +1,11 @@
 import { useEffect, Fragment } from "react";
 import { Link, useParams } from "react-router-dom";
 import Filter from "../../components/filter";
-import { useSection,useFilter } from "../../hooks/fetchData";
+import { useSection, useFilter } from "../../hooks/fetchData";
 import { MdTune } from "react-icons/md";
 import CardProduct from "../../components/productcard";
 import Skeleton from "react-loading-skeleton";
-import spinner from '../../assets/images/spinner.gif'
+import spinner from "../../assets/images/spinner.gif";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const Section = () => {
@@ -20,8 +20,9 @@ const Section = () => {
     isFetchingNextPage,
   } = useSection(section);
 
-
   useEffect(() => {
+    document.title = `T.J Shoes Collection :: ${section}  `;
+
     let searchForm = document.querySelector(".search-bar");
     document.querySelector("#search-btn").onclick = () => {
       searchForm.classList.toggle("active");
@@ -56,7 +57,6 @@ const Section = () => {
   return (
     <>
       {/* <SideBar /> */}
-
 
       <Filter />
       <main className="product-listing">
@@ -163,22 +163,23 @@ const Section = () => {
               </div>
             </div>
           </div>
-          {isLoading && !isError &&    (
+          {isLoading && !isError && (
             <>
-            <div>  
-              <Skeleton baseColor="#fafafa" highlightColor="#eaeaea"
-                className="m-1"
-                height={200}
-                    width={180}
-                    count={10}
-                   inline={true}
-                  />
-                </div>
-                  </>
-                  )}
+              <div>
+                <Skeleton
+                  baseColor="#fafafa"
+                  highlightColor="#eaeaea"
+                  className="m-1"
+                  height={200}
+                  width={180}
+                  count={10}
+                  inline={true}
+                />
+              </div>
+            </>
+          )}
 
           <div className="products my-2">
-           
             {!isLoading &&
               !isError &&
               data?.pages.map((groups, i) => {
@@ -202,7 +203,9 @@ const Section = () => {
               </button>
 
               <div className="p-2">
-                {isFetching && isFetchingNextPage ?  <img src={spinner}  className="mx-auto d-block"  alt="" /> : null}
+                {isFetching && isFetchingNextPage ? (
+                  <img src={spinner} className="mx-auto d-block" alt="" />
+                ) : null}
                 {!hasNextPage && (
                   <div className="alert alert-dark mb-1" role="alert">
                     You have seen all results want to see more consider remove
@@ -212,8 +215,7 @@ const Section = () => {
               </div>
             </>
           )}
-           
-           </div>
+        </div>
       </main>
     </>
   );

@@ -106,7 +106,7 @@ export const useProfile = () => {
   const navigate = useNavigate();
   return useQuery("user-profile", () => {
     return axios
-      .get(`api/user/pofile`)
+      .get(`api/user/profile`)
       .catch((error) => {
         const { status, statusText } = error.response;
         const { message, code } = error;

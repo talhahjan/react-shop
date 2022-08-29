@@ -4,7 +4,7 @@ import Filter from "../../components/filter";
 import { MdTune } from "react-icons/md";
 import CardProduct from "../../components/productcard";
 import { useCategory } from "../../hooks/fetchData";
-import spinner from '../../assets/images/spinner.gif'
+import spinner from "../../assets/images/spinner.gif";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 const Category = () => {
@@ -19,6 +19,7 @@ const Category = () => {
     isFetchingNextPage,
   } = useCategory(category);
   useEffect(() => {
+    document.title = `T.J Shoes Collection :: ${section}  > ${category}`;
     let searchForm = document.querySelector(".search-bar");
     document.querySelector("#search-btn").onclick = () => {
       searchForm.classList.toggle("active");
@@ -57,9 +58,6 @@ const Category = () => {
       <Filter />
       <main className="product-listing">
         <div className="container-fluid">
-
-
-
           {/* <!-- breadcrup start  --> */}
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb justify-content-start">
@@ -166,23 +164,23 @@ const Category = () => {
             </div>
           </div>
 
-          {isLoading && !isError &&    (
+          {isLoading && !isError && (
             <>
-            <div>  
-              <Skeleton baseColor="#fafafa" highlightColor="#eaeaea"
-                className="m-1"
-                height={200}
-                    width={180}
-                    count={10}
-                   inline={true}
-                  />
-                </div>
-                  </>
-                  )}
+              <div>
+                <Skeleton
+                  baseColor="#fafafa"
+                  highlightColor="#eaeaea"
+                  className="m-1"
+                  height={200}
+                  width={180}
+                  count={10}
+                  inline={true}
+                />
+              </div>
+            </>
+          )}
 
           <div className="products my-2">
-
-         
             {!isLoading &&
               !isError &&
               data?.pages.map((groups, i) => {
@@ -198,10 +196,7 @@ const Category = () => {
                   </Fragment>
                 );
               })}
-         </div>
-
-        
-
+          </div>
 
           {!isLoading && (
             <>
@@ -214,7 +209,9 @@ const Category = () => {
               </button>
 
               <div className="p-2">
-                {isFetching && isFetchingNextPage ?  <img src={spinner}  className="mx-auto d-block"  alt="" /> : null}
+                {isFetching && isFetchingNextPage ? (
+                  <img src={spinner} className="mx-auto d-block" alt="" />
+                ) : null}
                 {!hasNextPage && (
                   <div className="alert alert-dark mb-1" role="alert">
                     You have seen all results want to see more consider remove
@@ -224,8 +221,7 @@ const Category = () => {
               </div>
             </>
           )}
-      
-           </div>
+        </div>
       </main>
     </>
   );

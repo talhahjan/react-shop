@@ -1,6 +1,10 @@
+import { useEffect } from "react";
 import { MdHome } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 function NotFound() {
+  useEffect(() => {
+    document.title = "T.J Shoes Collection :: 404 Error page not found ";
+  }, []);
   const navigate = useNavigate();
   return (
     <div>

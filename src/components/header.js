@@ -183,12 +183,6 @@ const Header = () => {
                                 icon={<FaFacebookF />}
                               />
 
-                              <FacebookLogin
-                                cssClass="btn-social small btn-outline-github waves-effect waves-light m-1"
-                                btnText="Login With Github"
-                                icon={<FaGithub />}
-                              />
-
                               <GoogleLogin
                                 cssClass="d-inline-block m-1"
                                 size="large"

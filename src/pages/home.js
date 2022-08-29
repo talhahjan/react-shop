@@ -88,6 +88,8 @@ const Home = () => {
   const { isLoading: brandsLoading, data: brandsData } = usePopularBrands();
 
   useEffect(() => {
+    document.title = "T.J Shoes Collection :: Best Stop For Shopping";
+
     let searchForm = document.querySelector(".search-bar");
 
     window.onscroll = () => {

@@ -36,6 +36,7 @@ const Product = () => {
   };
 
   useEffect(() => {
+    document.title = `T.J Shoes Collection :: ${product} `;
     let searchForm = document.querySelector(".search-bar");
     document.querySelector("#search-btn").onclick = () => {
       searchForm.classList.toggle("active");

@@ -17,6 +17,7 @@ import GoogleLogin from "../../utils/socialLogin/google";
 import FacebookLogin from "../../utils/socialLogin/facebook";
 export default function Login() {
   useEffect(() => {
+    document.title = "T.J Shoes Collection ::Register Account";
     document.querySelector("body").classList.remove("wrapper");
     document.querySelector("body").classList.add("login-page");
     const cardLogin = document.querySelector(".card-login");
@@ -88,10 +89,13 @@ export default function Login() {
 
         <div className="card card-mdb mx-2 card-login">
           <div className="card-header card-header-primary">
-            <h5 className="text-center">Login With Social Account</h5>
+            <h5 className="text-center">Register Account</h5>
           </div>
           <div className="card-body">
             <div className="social-line text-center">
+              <p className="text-muted text-center my-2">
+                Register With Social Accounts
+              </p>
               <GoogleLogin
                 size="large"
                 cssClass="d-inline-block btn-social large m-2"
@@ -101,12 +105,6 @@ export default function Login() {
                 cssClass="btn-social large btn-outline-facebook waves-effect waves-light m-1"
                 btnText="Login With Facebook"
                 icon={<FaFacebookF />}
-              />
-
-              <FacebookLogin
-                cssClass="btn-social large btn-outline-github waves-effect waves-light m-1"
-                btnText="Login With Github"
-                icon={<FaGithub />}
               />
             </div>
             <p className="text-muted text-center my-2">Or Be Classical</p>
