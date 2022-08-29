@@ -1,6 +1,5 @@
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 
 export const handleCallbackResponse = (response) => {
   const userObject = jwt_decode(response.credential);
@@ -18,7 +17,18 @@ export const handleCallbackResponse = (response) => {
   LoginBackend(user);
 };
 
-
+const socialSignOut = (provider) => {
+  switch (provider) {
+    case "google.com":
+      console.log("google logout performed");
+      google.accounts.id.disableAutoSelect();
+    case "facebook.com":
+      FB.logout((response) => {
+        console.log("facebook logout", response);
+      });
+    case "twitter.com":
+  }
+};
 
 export const LoginBackend = async (user) => {
   await axios
@@ -52,15 +62,9 @@ export const signIn = (token) => {
 };
 
 export const onSuccessLogin = (user) => {
-
   console.log(user);
-  if (!user.email){
-Navigate('/register',{state:{id:1,name:'sabaoon'}});
-
-  }
-  else {
-   LoginBackend(user);
-  }
+  socialSignOut(user.provider);
+  LoginBackend(user);
 };
 
 export const onErrorLogin = (error) => {
