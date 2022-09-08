@@ -103,7 +103,7 @@ export default function Login() {
 
               <FacebookLogin
                 cssClass="btn-social large btn-outline-facebook waves-effect waves-light m-1"
-                btnText="Login With Facebook"
+                btnText="Register With Facebook"
                 icon={<FaFacebookF />}
               />
             </div>

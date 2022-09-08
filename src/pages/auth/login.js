@@ -102,7 +102,7 @@ export default function Register() {
 
               <FacebookLogin
                 cssClass="btn-social large btn-outline-facebook waves-effect waves-light m-1"
-                btnText="Login With Facebook"
+                btnText="Sign In With Facebook"
                 icon={<FaFacebookF />}
               />
             </div>
@@ -114,7 +114,7 @@ export default function Register() {
 
             <div className="py-1">
               <Link to="/register" className="text-dark">
-                Dont't have an ID Register ?
+                don't have an ID Register ?
               </Link>
             </div>
           </div>

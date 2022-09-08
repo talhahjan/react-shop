@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import axios from "axios";
 import App from "./App";
 import useAuth from "../src/utils/useAuth";
+import { CartProvider } from "react-use-cart";
 const queryClient = new QueryClient();
 const token = localStorage.getItem("token");
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
@@ -21,9 +22,11 @@ const userContext = createContext();
 root.render(
   <QueryClientProvider client={queryClient}>
     <React.StrictMode>
-      <userContext.Provider value={auth}>
-        <App />
-      </userContext.Provider>
+      <CartProvider>
+        <userContext.Provider value={auth}>
+          <App />
+        </userContext.Provider>
+      </CartProvider>
     </React.StrictMode>
   </QueryClientProvider>
 );

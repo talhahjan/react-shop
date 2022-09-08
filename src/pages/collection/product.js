@@ -10,7 +10,9 @@ import { useProduct } from "../../hooks/fetchData";
 // import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useParams, Link } from "react-router-dom";
+import { useCart } from "react-use-cart";
 const Product = () => {
+  const { addItem } = useCart();
   let { section, category, product } = useParams();
 
   const { isLoading, data, isError } = useProduct(product);
@@ -299,7 +301,7 @@ const Product = () => {
                         <div className="w-100 p-1 bd-highlight">
                           <button
                             id="btn-buy"
-                            onClick={() => addToCart()}
+                            onClick={() => addItem(data.data)}
                             className="btn btn-primary btn-block w-100"
                           >
                             <MdShoppingCart /> Add To Cart

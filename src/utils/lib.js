@@ -15,7 +15,7 @@ export const handleCallbackResponse = (response) => {
   };
   console.log("user ", user);
   LoginBackend(user);
-  socialSignOut(user.provider);
+  //  socialSignOut(user.provider);
 };
 
 const socialSignOut = (provider) => {
@@ -23,11 +23,12 @@ const socialSignOut = (provider) => {
     case "google.com":
       console.log("google logout performed");
       google.accounts.id.disableAutoSelect();
+      break;
     case "facebook.com":
       FB.logout((response) => {
         console.log("facebook logout", response);
       });
-    case "twitter.com":
+      break;
   }
 };
 
@@ -58,6 +59,7 @@ export const signOut = () => {
 
 export const signIn = (token) => {
   localStorage.setItem("token", token);
+
   window.location = process.env.REACT_APP_HOME_PAGE;
   console.log("signed Out successfully");
 };

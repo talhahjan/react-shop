@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaFacebookF } from "react-icons/fa";
+
 import { useNavigate } from "react-router-dom";
 import { onErrorLogin, onSuccessLogin } from "../lib";
 
@@ -53,9 +53,9 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
 
   const SignIn = () => {
     FB.getLoginStatus(function (response) {
-      const jwt = response.authResponse.accessToken;
-      const provider_id = response.authResponse.userID;
       if (response.authResponse) {
+        const jwt = response.authResponse.accessToken;
+        const provider_id = response.authResponse.userID;
         FB.api(
           "/me?fields=id,name,email,picture,location,first_name,last_name,hometown",
           (response) => {
@@ -76,7 +76,7 @@ const FacebookLogin = ({ cssClass, btnText, icon }) => {
                 }
               );
             } else {
-              console.log("User cancelled login or did not fully authorize.");
+              onErrorLogin("User cancelled login or did not fully authorize.");
             }
           },
           {

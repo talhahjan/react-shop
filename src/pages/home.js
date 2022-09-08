@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import "react-loading-skeleton/dist/skeleton.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 import {
   useFeaturedProduct,
   useLatestProduct,

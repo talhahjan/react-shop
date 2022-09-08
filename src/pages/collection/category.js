@@ -7,6 +7,7 @@ import { useCategory } from "../../hooks/fetchData";
 import spinner from "../../assets/images/spinner.gif";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+
 const Category = () => {
   let { section, category } = useParams();
   const {
