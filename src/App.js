@@ -12,7 +12,7 @@ import Error from "./pages/error";
 import NotFound from "./pages/error/404";
 import ProtectedRoutes from "./components/protectedRoutes";
 import AuthRoutes from "./components/AuthRoutes";
-
+import Cart from "./pages/cart";
 function App() {
   return (
     <BrowserRouter>
@@ -22,6 +22,7 @@ function App() {
           <Route path="/register" element={<Register />} />
         </Route>
         <Route path="/" element={<Layout />}>
+        <Route path="/cart" element={<Cart />} />
           <Route index element={<Home />} />
           <Route path="/collection/:section" element={<Section />} />
           <Route path="/collection/:section/:category" element={<Category />} />

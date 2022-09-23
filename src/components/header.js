@@ -12,11 +12,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { userContext } from "../index";
 import FacebookLogin from "../utils/socialLogin/facebook";
 import GoogleLogin from "../utils/socialLogin/google";
-import { useCart } from "react-use-cart";
 const Header = () => {
   const user = useContext(userContext);
-  const { isEmpty, totalUniqueItems, items, updateItemQuantity, removeItem } =
-    useCart();
   const logout = () => {
     localStorage.clear();
     sessionStorage.clear();
@@ -140,72 +137,20 @@ const Header = () => {
                       aria-expanded="false"
                     >
                       <MdShoppingCart />
-                      <span className="badge text-primary position-absolute top-2 start-60 translate-middle rounded-circle">
-                        {totalUniqueItems}
+                      <span className="badge bg-secondary text-primary position-absolute top-2 start-60 translate-middle rounded-circle">
+                       0
                       </span>
                     </a>
-                    {isEmpty && (
-                      <>
-                        <div className="dropdown-menu slideIn animate user-widget p-2">
-                          There is No product add
-                        </div>
-                      </>
-                    )}
 
-                    {!isEmpty && (
+                    { (
                       <>
                         <div
                           className="dropdown-menu slideIn animate user-widget p-2"
                           style={{ width: "400px" }}
                         >
                           <div className="container">
-                            {items.map((item) => {
-                              return (
-                                <div key={item.id} className="row my-1">
-                                  <div className="col">
-                                    <img
-                                      src={item.thumbnails[0].path}
-                                      alt=""
-                                      width="50"
-                                      height="50"
-                                    />
-                                  </div>
-                                  <div className="col-6">
-                                    {item.title}
-                                    <p className="text-muted">
-                                      Color : {item.color}
-                                    </p>
-                                  </div>
-                                  <div className="col text-muted">
-                                    <p> PKR :{item.price}</p>
-                                  </div>
-
-                                  <div className="row my-1 d-flex justify-content-center">
-                                    <div
-                                      className="btn btn-oultline-light input-group input-group-sm mb-3"
-                                      style={{ width: "200px" }}
-                                    >
-                                      <div className="input-group-prepend">
-                                        <span
-                                          className="input-group-text"
-                                          id="inputGroup-sizing-sm"
-                                        >
-                                          -
-                                        </span>
-                                      </div>
-
-                                      <div className="text-center p-2">1</div>
-                                      <div className="input-group-append">
-                                        <span className="input-group-text">
-                                          +
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
+                     
+                        </div>
 
                           <button className="btn w-100 btn-sm  btn-block btn-primary">
                             Check Out

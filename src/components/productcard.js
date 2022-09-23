@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { MdFavorite, MdLocalMall, MdVisibility } from "react-icons/md";
-
 const CardProduct = ({ product }) => {
+
   const section = product.categories[0].section;
 
   const category = product.categories[0];

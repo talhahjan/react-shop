@@ -1,6 +1,8 @@
 import Collapsable from "../components/collapsable";
-
+import { FilterActionTypes } from "../container/redux/actions/action-types";
+import { useDispatch } from "react-redux";
 const Filter = ({ props }) => {
+  const dispatch=useDispatch();
   return (
     <>
       {/* <!-- filter options offcanvas  --> */}
@@ -45,9 +47,10 @@ const Filter = ({ props }) => {
 
         <Collapsable title="colors">
           <div className="filter-content colors">
-            <div className="color-conatiner">
+            <div className="color-container">
               <div className="colors">
-                <span
+                <button className="btn btn-danger" onClick={()=>dispatch({type:FilterActionTypes.REMOVE_COLOR, payload:'bLUE'})}>Fil</button>
+                <span 
                   className="color"
                   style={{ border: "blue", backgroundColor: "blue" }}
                 ></span>

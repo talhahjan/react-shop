@@ -10,32 +10,52 @@ import { useProduct } from "../../hooks/fetchData";
 // import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useParams, Link } from "react-router-dom";
-import { useCart } from "react-use-cart";
-const Product = () => {
-  const { addItem } = useCart();
+import { useSelector, useDispatch,connect } from 'react-redux'
+import { AddItem } from "../../container/redux/actions/actions";
+const Product = ({cart}) => {
+  console.log(cart)
+  const selectSize = (e) => {
+    const sizesClass = document.querySelectorAll(".size");
+    for (let i = 0; i < sizesClass.length; i++) {
+      sizesClass[i].classList.remove("active");
+    }
+    document.getElementById(`size_${e}`).classList.add("active");
+    setSize(e);
+  };
+  
+  const dispatch = useDispatch();
   let { section, category, product } = useParams();
 
   const { isLoading, data, isError } = useProduct(product);
+const [size, setSize]=useState(0)
 
-  const [size, setSize] = useState(null);
-  const notify = (type, msg) => {
-    switch (type) {
-      case "error":
-        toast.error(msg);
-        break;
-      case "success":
-        toast.success(msg);
-        break;
-      case "warn":
-        toast.warn(msg);
-        break;
-      case "info":
-        toast.info(msg);
-        break;
-      default:
-        toast(msg);
+  const addToCart = (product) => {
+    const sizes = document.querySelector(".sizes");
+    if (!size) {
+      sizes.classList.add("shake");
+      // Buttons stops to shake after 2 seconds
+      toast.error("Please Select Size");
+      setTimeout(() => sizes.classList.remove("shake"), 1000);
+    } else {
+      
+      let item={
+        id: product.id,
+        title:product.title,
+ thumbnail:product.thumbnails[0].path,
+        price: product.price, 
+     quantity:1,
+     size:size,
+     color:product.color
+      }
+  dispatch({type:"ADD_TO_CART", payload:item})
+// dispatch({type:"SUB_QTY", payload:product.id})
+//  dispatch({type:"REMOVE_FROM_CART", payload:product.id})
+
+    toast.success("result Added Successfully");
     }
   };
+
+
 
   useEffect(() => {
     document.title = `T.J Shoes Collection :: ${product} `;
@@ -50,32 +70,14 @@ const Product = () => {
     window.onscroll = () => {
       searchForm.classList.remove("active");
     };
-  });
-  const addToCart = () => {
-    const sizes = document.querySelector(".sizes");
-    if (!size) {
-      sizes.classList.add("shake");
-      // Buttons stops to shake after 2 seconds
-      notify("error", "Please Select Size");
-      setTimeout(() => sizes.classList.remove("shake"), 1000);
-    } else {
-      notify("success", "result Added Successfuly");
-    }
-  };
-  useEffect(() => {
     document.querySelector("body").classList.add("page-product-detail");
     return () => {
       document.querySelector("body").classList.remove("page-product-detail");
     };
-  }, []);
-  const selectSize = (e) => {
-    const sizesClass = document.querySelectorAll(".size");
-    for (let i = 0; i < sizesClass.length; i++) {
-      sizesClass[i].classList.remove("active");
-    }
-    document.getElementById(`size_${e}`).classList.add("active");
-    setSize(e);
-  };
+  },[]);
+
+
+
   return (
     <>
       {/* <SideBar /> */}
@@ -86,7 +88,7 @@ const Product = () => {
             <>
               <div className="">
                 <div className="py-4">loading</div>
-                <div className="py-4">Loding ..</div>
+                <div className="py-4">Lodging ..</div>
                 <div className="row">
                   <div className="col-md-12 col-lg-6">Loading ..</div>
                   <div className="col-md-12 col-lg-6">Loading ..</div>
@@ -96,7 +98,7 @@ const Product = () => {
           )}
           {!isLoading && !isError && data && (
             <>
-              {/* <!-- breadcrup start  --> */}
+              {/* <!-- breadcrumb start  --> */}
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb justify-content-center">
                   <li className="breadcrumb-item">
@@ -235,7 +237,7 @@ const Product = () => {
                           <p> {Parser(data.data.description)} </p>
                         </Collapsable>
                       )}
-                      {console.log(process.env)}
+
                       <Collapsable title="More Details">
                         {data.data.article && (
                           <div className="py-1">
@@ -301,7 +303,7 @@ const Product = () => {
                         <div className="w-100 p-1 bd-highlight">
                           <button
                             id="btn-buy"
-                            onClick={() => addItem(data.data)}
+                            onClick={() => addToCart(data.data)}
                             className="btn btn-primary btn-block w-100"
                           >
                             <MdShoppingCart /> Add To Cart
@@ -326,4 +328,10 @@ const Product = () => {
   );
 };
 
-export default Product;
+
+const mapStateToProps=(state)=>{
+  const {cart}=state;
+  return {cart:cart}
+}
+
+export default connect(mapStateToProps)(Product);

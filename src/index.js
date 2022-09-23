@@ -7,7 +7,10 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import axios from "axios";
 import App from "./App";
 import useAuth from "../src/utils/useAuth";
-import { CartProvider } from "react-use-cart";
+import { Provider } from 'react-redux';
+import {store} from './container/redux/store'
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/lib/integration/react";
 const queryClient = new QueryClient();
 const token = localStorage.getItem("token");
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
@@ -18,15 +21,19 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const auth = useAuth(token);
 const userContext = createContext();
+let persistor=persistStore(store);
 
 root.render(
   <QueryClientProvider client={queryClient}>
     <React.StrictMode>
-      <CartProvider>
-        <userContext.Provider value={auth}>
-          <App />
-        </userContext.Provider>
-      </CartProvider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor} >
+      <userContext.Provider value={auth}>
+        <App />
+      </userContext.Provider>
+      </PersistGate>
+        
+        </Provider>
     </React.StrictMode>
   </QueryClientProvider>
 );
