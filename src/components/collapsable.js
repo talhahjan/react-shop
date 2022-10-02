@@ -14,7 +14,7 @@ export default function Collapsable(props) {
           className="card-title d-flex justify-content-between"
           {...getToggleProps()}
         >
-          <h6 className="title">{props.title}</h6>
+          <h6 className="title text-capitalize">{props.title}</h6>
           {isExpanded ? (
             <MdKeyboardArrowUp className="text-dark" />
           ) : (

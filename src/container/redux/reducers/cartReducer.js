@@ -11,8 +11,8 @@ const initialState={
  const CartReducer=(state=initialState, action)=>{
     switch (action.type) {
         case CartActionTypes.ADD_TO_CART:
-            let prod=action.payload;
-            let inCart=state.items.find((item)=>item.id===prod.id)
+         let prod=action.payload;
+        let inCart=state.items.find((item)=>item.id===prod.id)
 if(inCart)
 return {...state, 
     total:state.total+prod.price, 

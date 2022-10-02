@@ -87,10 +87,31 @@ export const useSection = (slug) => {
 };
 
 // this hooks will collects all the products in particular category
-export const useCategory = (slug) => {
+export const useCategory = (slug,filter) => {
+
+let queryParams='sortBy='+filter.sortBy;
+
+if(filter.colors.length>0)
+queryParams+='&colors='+filter.colors.join(',')
+
+
+if(filter.brands.length>0)
+queryParams+='&brands='+filter.brands.join(',')
+
+if(filter.materials.length>0)
+queryParams+='&materials='+filter.materials.join(',')
+
+ if(filter.priceRange!==null)
+ queryParams+='&priceMax='+filter.priceRange.Min+'&priceMax='+filter.priceRange.Max
+
+
+
+
+
   return useInfiniteQuery(
     ["category", slug],
-    ({ pageParam = 1 }) => axios.get(`api/category/${slug}?page=${pageParam}`),
+    ({ pageParam = 1 }) =>
+      axios.get(`api/category/${slug}?page=${pageParam}&${queryParams}`),
     {
       getNextPageParam: (pages) => {
         // let us to destructure last page and current page pages.data variable
@@ -182,7 +203,7 @@ export const useFilter = () => {
     {
       cacheTime: 50000,
       // enabled: false,
-      // redirect user to 520 error page if any error occured
+      // redirect user to 520 error page if any error occurred
     }
   );
 };

@@ -7,10 +7,13 @@ import { useCategory } from "../../hooks/fetchData";
 import spinner from "../../assets/images/spinner.gif";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-
-const Category = () => {
+import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
+const Category = ({filter}) => {
+  const dispatch=useDispatch()
   let { section, category } = useParams();
   const {
+    refetch,
     isLoading,
     isError,
     data,
@@ -18,8 +21,51 @@ const Category = () => {
     fetchNextPage,
     isFetching,
     isFetchingNextPage,
-  } = useCategory(category);
-  useEffect(() => {
+  } = useCategory(category,filter);
+
+
+useEffect(()=>{
+ // only refetch the first page
+setTimeout(() => {
+  refetch({ refetchPage: (page, index) => index === 0 })
+  console.log('page prefetched')
+}, 500);
+
+},[filter])
+
+
+
+
+useEffect(() => {
+
+// select radio btn for sorting 
+  let  btnSortBy = document.querySelectorAll('.sortBy input');
+ 
+// run for each loop to to add EventListener for each btn 
+btnSortBy.forEach(btn=>{
+  btn.addEventListener("change", (e)=>{
+    // store  sorting text and transform it to lower case  text
+    let sort=btn.nextSibling.innerText.toLowerCase();
+    //dispatch with action set_sorting according to selected sorting
+  dispatch({type:"SET_SORTING", payload:sort})
+  })
+})
+
+
+
+// same operation like above mentioned login for small screen like mobile devices or tablets  UI
+
+let dropDownSortBy=document.querySelectorAll('ul.sortBy2 li button');
+
+dropDownSortBy.forEach(btn=>{
+  btn.addEventListener("click", e=>{
+    let sortBy=e.target.innerText.toLowerCase();
+dispatch({type:"SET_SORTING", payload:sortBy})
+  })
+})
+
+
+
     document.title = `T.J Shoes Collection :: ${section}  > ${category}`;
     let searchForm = document.querySelector(".search-bar");
     document.querySelector("#search-btn").onclick = () => {
@@ -34,12 +80,6 @@ const Category = () => {
 
     const sorting = document.querySelectorAll(".sorting");
     const sortSelect = document.querySelector("#SortMenuButton");
-
-    for (let i = 0; i < sorting.length; i++) {
-      sorting[i].addEventListener("click", function (event) {
-        document.querySelector("#SortMenuButton").innerHTML = this.innerText;
-      });
-    }
 
     for (let i = 0; i < sortSelect.length; i++) {
       sortSelect[i].addEventListener("click", function (event) {
@@ -56,10 +96,10 @@ const Category = () => {
   return (
     <>
       {/* <SideBar /> */}
-      <Filter />
+      <Filter  />
       <main className="product-listing">
         <div className="container-fluid">
-          {/* <!-- breadcrup start  --> */}
+          {/* <!-- breadcrumb start  --> */}
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb justify-content-start">
               <li className="breadcrumb-item">
@@ -105,24 +145,35 @@ const Category = () => {
                   >
                     Sort By :&nbsp;
                   </span>
-                  <div
-                    className="btn-group"
-                    role="group"
-                    aria-label="Basic example"
-                  >
-                    <button className="btn btn-outline-primary btn-sm">
-                      Trending
-                    </button>
-                    <button className="btn btn-outline-primary btn-sm">
-                      Latest
-                    </button>
-                    <button className="btn btn-outline-primary btn-sm">
-                      Popular
-                    </button>
-                    <button className="btn btn-outline-primary btn-sm">
-                      featured
-                    </button>
-                  </div>
+                  
+                  
+                  
+                  
+                  
+                  
+  <div className="btn-group sortBy" role="group" aria-label="Basic radio toggle button group">
+  <input type="radio" className="btn-check" name="btnradio" id="btnradio1"  autoComplete="off" defaultChecked={true} />
+  <label className="btn btn-outline-primary btn-sm" htmlFor="btnradio1">Title</label>
+
+  <input type="radio" className="btn-check" name="btnradio" id="btnradio2" autoComplete="off" />
+  <label className="btn btn-outline-primary btn-sm" htmlFor="btnradio2">Latest</label>
+  <input type="radio" className="btn-check" name="btnradio" id="btnradio3" autoComplete="off" />
+  <label className="btn btn-outline-primary btn-sm" htmlFor="btnradio3">Trending</label>
+</div>
+
+
+
+
+
+
+
+
+
+
+                  
+                  
+                  
+                  
                 </div>
                 <div className="dropdown d-flex d-lg-none">
                   <button
@@ -135,29 +186,30 @@ const Category = () => {
                     Sort
                   </button>
                   <ul
-                    className="dropdown-menu"
+                    className="dropdown-menu sortBy2"
                     aria-labelledby="SortMenuButton"
-                    id="categorList"
+                    id="categoryList"
                   >
+
                     <li>
-                      <a className="dropdown-item sorting" href="!#">
+                      <button className="dropdown-item sorting" href="#">
                         Trending
-                      </a>
+                      </button>
                     </li>
                     <li>
-                      <a className="dropdown-item sorting" href="!#">
+                      <button className="dropdown-item sorting" href="#">
                         Latest
-                      </a>
+                      </button>
                     </li>
                     <li>
-                      <a className="dropdown-item sorting" href="!#">
+                      <button className="dropdown-item sorting" href="#">
                         Popular
-                      </a>
+                      </button>
                     </li>
                     <li>
-                      <a className="dropdown-item sorting" href="!#">
+                      <button className="dropdown-item sorting" href="#">
                         Featured
-                      </a>
+                      </button>
                     </li>
                   </ul>
                 </div>
@@ -165,7 +217,7 @@ const Category = () => {
             </div>
           </div>
 
-          {isLoading && !isError && (
+          {(isLoading || isFetching) && !isError && (
             <>
               <div>
                 <Skeleton
@@ -228,4 +280,9 @@ const Category = () => {
   );
 };
 
-export default Category;
+const mapStateToProps=(state)=>{
+  const {filter}=state;
+  return {filter:filter}
+}
+
+export default connect(mapStateToProps)(Category);

@@ -41,7 +41,44 @@
   }
 }
 .shake {
-  animation: shake 1s infinite;
+  -webkit-animation: shake 1s infinite;
+          animation: shake 1s infinite;
+}
+
+@-webkit-keyframes shake {
+  0% {
+    transform: translate(2px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-2deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(3deg);
+  }
+  30% {
+    transform: translate(0px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(2px, 1px) rotate(-2deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(4deg);
+  }
+  90% {
+    transform: translate(2px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 
 @keyframes shake {
@@ -154,7 +191,8 @@ header .search-bar .input-group .form-control:focus + .input-group-append button
   box-shadow: 0 0 8px 0 var(--bs-primary);
 }
 header .search-bar .input-group .form-control:focus + .input-group-append button svg {
-  animation: rotation 3s infinite linear;
+  -webkit-animation: rotation 3s infinite linear;
+          animation: rotation 3s infinite linear;
 }
 header .search-bar .input-group .input-group-prepend .dropdown .btn {
   border-radius: 0px;
@@ -186,7 +224,10 @@ header .search-bar .input-group .input-group-append button {
   font-family: "courgette", cursive;
   font-weight: 700;
   font-size: 16px;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   color: var(--bs-primary);
   text-transform: uppercase;
 }
@@ -223,6 +264,18 @@ header .search-bar .input-group .input-group-append button {
 }
 
 /* css for form */
+::-moz-placeholder {
+  font-family: "Roboto slab", sans-serif;
+  font-size: 0.8em;
+  font-weight: 300;
+  color: gray;
+}
+:-ms-input-placeholder {
+  font-family: "Roboto slab", sans-serif;
+  font-size: 0.8em;
+  font-weight: 300;
+  color: gray;
+}
 ::placeholder {
   font-family: "Roboto slab", sans-serif;
   font-size: 0.8em;
@@ -245,7 +298,9 @@ header .search-bar .input-group .input-group-append button {
   box-sizing: border-box;
   transition: 0.3s;
   background-clip: padding-box;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 .form-control:focus,
@@ -393,9 +448,6 @@ header .search-bar .input-group .input-group-append button {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
 }
-.filter .card .filter-content .colors input:checked + label::after {
-  content: "✓";
-}
 .filter .card .filter-content .colors .color {
   border: 1px black solid;
   padding: 4px 8px;
@@ -405,13 +457,19 @@ header .search-bar .input-group .input-group-append button {
   text-align: center;
   cursor: pointer;
 }
+.filter .card .filter-content .colors .color input:checked label:after {
+  content: "✓";
+}
 .filter .card .card-header {
   margin: 4px;
   padding: 4px;
   box-shadow: none;
   background-color: #fff;
   border: none;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .filter .card .card-header i {
   color: #000;
@@ -467,8 +525,8 @@ header .search-bar .input-group .input-group-append button {
 }
 .filter .slider .progress {
   height: 5px;
-  left: 0;
-  right: 0;
+  left: 25%;
+  right: 25%;
   position: absolute;
   border-radius: 5px;
   background: var(--bs-primary);
@@ -527,7 +585,10 @@ main section .btn-prev {
   font-weight: bold;
   font-size: 12px;
   transition: 0.6s ease;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   z-index: 999;
   height: 25px;
   line-height: 25px;
@@ -671,6 +732,7 @@ main .carousel-inner {
 }
 .page-product-listing .product-listing .filter-sort {
   max-width: 960px;
+  position: -webkit-sticky;
   position: sticky;
   top: 50px;
   left: 0;
@@ -931,7 +993,8 @@ main .carousel-inner {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
 }
 .page-user-profile .card-profile .profile-content {
@@ -1049,7 +1112,8 @@ main .carousel-inner {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  -o-object-fit: fill;
+     object-fit: fill;
   transition: 0.5s ease-in-out;
   transform-origin: right;
 }
@@ -1217,7 +1281,8 @@ footer.sm {
 /* animation to rotate at 360deg on y axis */
 /* shake a container  */
 .shake {
-  animation: shake 1s infinite;
+  -webkit-animation: shake 1s infinite;
+          animation: shake 1s infinite;
 }
 
 @keyframes shake {
@@ -1255,12 +1320,28 @@ footer.sm {
     transform: translate(1px, -2px) rotate(-1deg);
   }
 }
+@-webkit-keyframes rotation {
+  from {
+    transform: rotatey(0deg);
+  }
+  to {
+    transform: rotatey(359deg);
+  }
+}
 @keyframes rotation {
   from {
     transform: rotatey(0deg);
   }
   to {
     transform: rotatey(359deg);
+  }
+}
+@-webkit-keyframes lageraize {
+  from {
+    transform: scale(0.7);
+  }
+  to {
+    transform: scale(1.7);
   }
 }
 @keyframes lageraize {
@@ -1311,6 +1392,17 @@ footer.sm {
   -webkit-animation-fill-mode: both;
 }
 
+@-webkit-keyframes bmd-dropdown-animation {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @keyframes bmd-dropdown-animation {
   from {
     opacity: 0;
@@ -1324,24 +1416,20 @@ footer.sm {
 @-webkit-keyframes opacity {
   0% {
     opacity: 0;
-    -webkit-transform: scale(3);
     transform: scale(3);
   }
   100% {
     opacity: 1;
-    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
 @keyframes opacity {
   0% {
     opacity: 0;
-    -webkit-transform: scale(3);
     transform: scale(3);
   }
   100% {
     opacity: 1;
-    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
@@ -1374,6 +1462,7 @@ footer.sm {
     max-width: 400px;
   }
   .btn-buy {
+    position: -webkit-sticky;
     position: sticky;
     left: 0;
     bottom: 50px;
