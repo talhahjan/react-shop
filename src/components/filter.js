@@ -96,7 +96,7 @@ else{
 
     
 priceInput.forEach(input=>{
-    input.addEventListener('change',(e)=>{
+    input.addEventListener('input',(e)=>{
       let minVal=parseInt(priceInput[0].value),
       maxVal=parseInt(priceInput[1].value);
  if((maxVal - minVal >= priceGap) && maxVal <= 10000 ){
